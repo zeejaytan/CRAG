@@ -1,0 +1,341 @@
+body {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+:root {
+    --swiper-theme-color: #8900e1 !important;
+}
+
+.tldr {
+    font-size: 20px;
+    /*margin-top: 20px;*/
+    margin-bottom: 20px;
+    padding: 8px;
+    background: linear-gradient(45deg, #9860ff33, #d2cb0033);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+video {
+    border-radius: 8px;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-gap: 10px;
+}
+
+.image-grid img {
+    width: 236px; /* Make images responsive */
+    height: auto;
+    border-radius: 8px; /* Optional: Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+}
+
+#copyButton {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    border-radius: 5px;
+    border: none;
+    background: none;
+    padding: 5px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+#copyButton:hover {
+    background-color: #ccc;
+}
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block {
+    margin: 5px;
+    display: inline-block;
+}
+
+.name {
+    font-variant: small-caps;
+}
+
+.teaser {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.publication-header .hero-body {
+}
+
+.publication-title {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.publication-authors {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.publication-venue {
+    color: #555;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.publication-awards {
+    color: #ff3860;
+    width: fit-content;
+    font-weight: bolder;
+}
+
+.publication-authors {
+}
+
+.publication-authors a {
+    color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+    display: inline-block;
+}
+
+.publication-banner img {
+}
+
+.publication-authors {
+    /*color: #4286f4;*/
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.publication-body img {
+}
+
+.results-carousel {
+    overflow: hidden;
+}
+
+.results-carousel .item {
+    margin: 5px;
+    overflow: hidden;
+    border: 1px solid #bbb;
+    border-radius: 10px;
+    padding: 0;
+    font-size: 0;
+}
+
+.results-carousel video {
+    margin: 0;
+}
+
+
+.interpolation-panel {
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+.interpolation-panel .interpolation-image {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.interpolation-video-column {
+}
+
+.interpolation-panel .slider {
+    margin: 0 !important;
+}
+
+.interpolation-panel .slider {
+    margin: 0 !important;
+}
+
+#interpolation-image-wrapper {
+    width: 100%;
+}
+
+#interpolation-image-wrapper img {
+    border-radius: 5px;
+}
+
+.slider-block {
+    display: none; /* Hide all divs initially */
+    opacity: 0;
+}
+
+.slider-block.show {
+    display: block;
+    opacity: 1;
+}
+
+.btn {
+    background-color: #8b00e1cb !important; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding around the button */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Font size */
+    margin: 10px; /* Space between buttons */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.btn:hover {
+    background-color: #8b00e178 !important; /* Darker green on hover */
+}
+
+.btn.active {
+    background-color: #8b00e178 !important;
+}
+
+.btn.inactive {
+    background-color: #8b00e1cb !important;
+}
+
+/* this is for text and image block */
+.hidden {
+    display: none;
+}
+
+.navbar-item.center {
+    flex-grow: 0;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.visualization-container {
+    margin: 20px 0;
+}
+
+#main-model {
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.hotspot {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    border: none;
+    background-color: #ff5252;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.hotspot:hover {
+    background-color: #ff0000;
+    transform: scale(1.2);
+}
+
+.annotation {
+    position: absolute;
+    transform: translate(calc(-50% + 12px), calc(-100% - 12px));
+    background-color: #ffffff;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+}
+
+.hotspot:hover .annotation {
+    opacity: 1;
+}
+
+/* Progress bar styles */
+.progress-bar {
+    display: block;
+    width: 33%;
+    height: 10%;
+    max-height: 2px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    border-radius: 25px;
+    box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.update-bar {
+    background-color: rgba(0, 133, 255, 0.9);
+    width: 0%;
+    height: 100%;
+    border-radius: 25px;
+    float: left;
+    transition: width 0.3s;
+}
+
+#ar-button {
+    background-image: url(static/images/ar_icon.png);
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 12px 50%;
+    background-color: #fff;
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    padding: 0px 16px 0px 40px;
+    font-family: Roboto Regular, Helvetica Neue, sans-serif;
+    font-size: 14px;
+    color: #4285f4;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    border: 1px solid #DADCE0;
+}
+
+#ar-button:active {
+    background-color: #E8EAED;
+}
+
+#ar-button:focus {
+    outline: none;
+}
+
+#ar-prompt {
+    position: absolute;
+    left: 50%;
+    bottom: 175px;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 14px;
+    color: white;
+    visibility: hidden;
+}

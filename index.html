@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Unleashing the Power of Data Synthesis in Visual Localization">
+  <meta name="keywords" content="Visual Localization, 3D Gaussian, Data Synthesis, Adversarial Training">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GARF</title>
+  <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>🐈</text></svg>">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/copy2clipboard.js"></script>
+  <script type="text/javascript" async
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+  <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
+
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3NB21ZH04R"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-3NB21ZH04R');
+</script>
+
+<body>
+
+<!-- Navigation bar. -->
+<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+  <div class="container is-max-desktop">
+
+    <!-- Lab logo. Will stay here even if view from mobile -->
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://ai4ce.github.io/" target="_blank" rel="noopener noreferrer">
+        <img src="./static/images/ai4ce_new_linear_notext.svg" alt="AI4CE Lab" style="height: 2.0rem;">
+      </a>
+      <a role="button"
+         onclick="this.classList.toggle('is-active');document.querySelector('#'+this.dataset.target).classList.toggle('is-active');"
+         class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <!-- Will collapse into a "burger" menu on mobile. -->
+    <div id="navbarBasicExample" class="navbar-menu">
+
+      <div class="navbar-start">
+        <a class="navbar-item" href="https://www.nyu.edu/" target="_blank">
+          <img src="./static/images/NYU_Long_RGB_Color.png" alt="NYU Logo" style="height: 2.0rem;">
+        </a>
+      </div>
+
+      <div class="navbar-end">
+        <!-- After accepted, add conference logo here -->
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://ai4ce.github.io/RAP/" target="_blank">
+              RAP
+            </a>
+            <a class="navbar-item" href="https://ai4ce.github.io/LUWA/" target="_blank">
+              LUWA
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</nav>
+
+<!-- Title and authors -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">
+            <img src="./static/images/GARF.png" alt="cat" style="height: 10.0rem;">
+          </h1>
+          <h1 class="title is-2 publication-title">Learning Generalizable 3D Reassembly<br>for Real-World Fractures</h1>
+          <div class="column is-full_width">
+            <h2 class="title is-4"><a href="hhttps://iccv.thecvf.com/">ICCV 2025</a></h2>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://Louis-Leee.github.io" target="_blank">Sihang Li<sup>1*</sup></a>,</span>
+            <span class="author-block">
+              <a href="https://github.com/JDScript" target="_blank">Zeyu Jiang<sup>1*</sup></a>,</span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/grace-chen-37a974293/"
+                 target="_blank">Grace Chen<sup>1†</sup></a>,</span>
+            <span class="author-block">
+              <a href="https://uk.linkedin.com/in/chenyang-xu-755125181"
+                 target="_blank">Chenyang Xu<sup>1†</sup></a>,</span>
+            <span class="author-block">
+              <a href="https://kevintsq.github.io/" target="_blank">Siqi Tan<sup>1</sup></a>,</span>
+            <span class="author-block">
+              <a href="https://as.nyu.edu/departments/anthropology/people/graduate-students/doctoral-students/xue-wang.html"
+                 target="_blank">Xue Wang<sup>1</sup></a>,</span>
+            <span class="author-block">
+              <a href="https://irvingf7.github.io/" target="_blank">Irving Fang<sup>1</sup></a>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=aEmILscAAAAJ&hl=en"
+                 target="_blank">Kristof Zyskowski<sup>2</sup></a>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=lo1VSPUAAAAJ&hl=en"
+                 target="_blank">Shannon P. McPherron<sup>3</sup></a>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=JqLHsvYAAAAJ&hl=en"
+                 target="_blank">Radu Iovita<sup>1</sup></a>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=YeG8ZM0AAAAJ"
+                 target="_blank">Chen Feng<sup>1✉</sup></a>,
+            </span>
+            <span class="author-block">
+              <a href="https://jingz6676.github.io" target="_blank">Jing Zhang<sup>1✉</sup></a></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block" style="margin-right: 1.5em;"> <sup>1</sup>New York University</span>
+            <span class="author-block" style="margin-right: 1.5em;"> <sup>2</sup>Yale University</span>
+            <span class="author-block" style="margin-right: 1em;"> <sup>3</sup>Max Planck Institute for Evolutionary Anthropology</span>
+
+            <br>
+            <span class="author-block" style="font-size: large">*, † Equal Contribution, </span>
+            <span class="author-block" style="font-size: large">✉ Corresponding Author</span>
+          </div>
+
+          <div class="column has-text-centered" style="margin-top: 1em;">
+            <div class="publication-links">
+              <span class="link-block">
+                 <!-- add here later. -->
+                <a href="static/GARF.pdf" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+              <!-- add here later. -->
+              <a href="https://arxiv.org/abs/2504.05400" target="_blank"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                </span>
+                <span>arXiv</span>
+              </a> 
+              </span>
+              <!-- Video Link. -->
+              <!--              <span class="link-block">-->
+              <!--                <a href="https:"-->
+              <!--                   class="external-link button is-normal is-rounded is-dark">-->
+              <!--                  <span class="icon">-->
+              <!--                      <i class="fab fa-youtube"></i>-->
+              <!--                  </span>-->
+              <!--                  <span>Video</span>-->
+              <!--                </a>-->
+              <!--              </span>-->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/ai4ce/GARF" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <span class="link-block">
+                <a href="https://garf-demo.pages.dev/" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-globe"></i>
+                  </span>
+                  <span>Demo</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+              <a href="https://drive.google.com/drive/folders/1x_7L30s5Qs_Ggg9J33o7E6_jOmlUd9TF?usp=sharing" target="_blank"
+                 class="external-link button is-normal is-rounded is-dark"
+                 style="white-space: normal; text-align: center;">
+                <span class="icon">
+                    <i class="far fa-images"></i>
+                </span>
+                <span style="white-space: normal; line-height: 1.1;">FRACTURA Dataset</span>
+              </a>
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser"></section>
+<div class="container is-max-desktop">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-full-width teaser no-margin">
+
+      <!-- <div class="swiper swiper1" style="max-height: 400px; margin-bottom: 1rem;">
+        <div class="swiper-wrapper">
+          <video muted autoplay loop controls class="swiper-slide" style="max-height: 400px; object-fit: contain;">
+            <source src="static/videos/fractura/bowl.mp4" type="video/mp4">
+          </video>
+          <video muted autoplay loop controls class="swiper-slide" style="max-height: 400px; object-fit: contain;">
+            <source src="static/videos/fractura/plate.mp4" type="video/mp4">
+          </video>
+          <video muted autoplay loop controls class="swiper-slide" style="max-height: 400px; object-fit: contain;">
+            <source src="static/videos/fractura/pot.mp4" type="video/mp4">
+          </video>
+          <video muted autoplay loop controls class="swiper-slide" style="max-height: 400px; object-fit: contain;">
+            <source src="static/videos/fractura/vase1.mp4" type="video/mp4">
+          </video>
+          <video muted autoplay loop controls class="swiper-slide" style="max-height: 400px; object-fit: contain;"></video>
+            <source src="static/videos/fractura/vase2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div> -->
+
+      <p class="tldr" style="font-size: 15px">
+        GARF is a generalizable flow matching-based 3D reassembly method trained on <b>1.9 Million</b> fractures,
+        enabling precise real-world fragment pose alignment. 😊 Achieves strong performance across extensive benchmarks,
+        concise code with efficient performance.
+      </p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Visualization Section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-multiline is-mobile has-text-centered">
+      <div class="columns is-multiline">
+        <!-- 桌面端：第一行视频，第二行模型 -->
+        <!-- 视频行 -->
+        <div class="column is-one-fifth is-hidden-mobile">
+          <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+            <source src="static/videos/fractura/bowl.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-one-fifth is-hidden-mobile">
+          <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+            <source src="static/videos/fractura/plate.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-one-fifth is-hidden-mobile">
+          <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+            <source src="static/videos/fractura/pot.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-one-fifth is-hidden-mobile">
+          <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+            <source src="static/videos/fractura/vase1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-one-fifth is-hidden-mobile">
+          <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+            <source src="static/videos/fractura/vase2.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <!-- 模型行 -->
+        <div class="column is-one-fifth is-hidden-mobile">
+          <model-viewer src="static/models/fractura/bowl.glb" camera-controls interaction-prompt="none" auto-rotate
+                        shadow-intensity="1" exposure="0.7"
+                        style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
+            <div
+                style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              Bowl
+            </div>
+          </model-viewer>
+        </div>
+        <div class="column is-one-fifth is-hidden-mobile">
+          <model-viewer src="static/models/fractura/plate.glb" camera-controls interaction-prompt="none" auto-rotate
+                        shadow-intensity="1" exposure="0.7"
+                        style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
+            <div
+                style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              Plate
+            </div>
+          </model-viewer>
+        </div>
+        <div class="column is-one-fifth is-hidden-mobile">
+          <model-viewer src="static/models/fractura/pot.glb" camera-controls interaction-prompt="none" auto-rotate
+                        shadow-intensity="1" exposure="0.7"
+                        style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
+            <div
+                style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              Pot
+            </div>
+          </model-viewer>
+        </div>
+        <div class="column is-one-fifth is-hidden-mobile">
+          <model-viewer src="static/models/fractura/vase1.glb" camera-controls interaction-prompt="none" auto-rotate
+                        shadow-intensity="1" exposure="0.7"
+                        style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
+            <div
+                style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              Vase
+            </div>
+          </model-viewer>
+        </div>
+        <div class="column is-one-fifth is-hidden-mobile">
+          <model-viewer src="static/models/fractura/vase2.glb" camera-controls interaction-prompt="none" auto-rotate
+                        shadow-intensity="1" exposure="0.7"
+                        style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
+            <div
+                style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              Vase
+            </div>
+          </model-viewer>
+        </div>
+
+        <!-- 手机端：五行，每行左侧视频，右侧模型 -->
+        <!-- 手机端内容 -->
+        <div class="column is-full is-hidden-tablet">
+          <div class="columns is-mobile">
+            <!-- 第一个物品 -->
+            <div class="column is-half">
+              <video playsinline autoplay loop muted style="width: 100%; object-fit: cover;">
+                <source src="static/videos/fractura/bowl.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column is-half">
+              <model-viewer src="static/models/fractura/bowl.glb" camera-controls interaction-prompt="none" auto-rotate
+                            shadow-intensity="1" exposure="0.7"
+                            style="width: 100%; height: calc(100% - 0.375rem); background-color: #f7f7f7; border-radius: 8px; position: relative;">
+                <div
+                    style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                  Bowl
+                </div>
+              </model-viewer>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-full is-hidden-tablet">
+          <div class="columns is-mobile">
+            <!-- 第二个物品 -->
+            <div class="column is-half">
+              <video playsinline autoplay loop muted style="width: 100%; object-fit: cover;">
+                <source src="static/videos/fractura/plate.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column is-half">
+              <model-viewer src="static/models/fractura/plate.glb" camera-controls interaction-prompt="none" auto-rotate
+                            shadow-intensity="1" exposure="0.7"
+                            style="width: 100%; height: calc(100% - 0.375rem); background-color: #f7f7f7; border-radius: 8px; position: relative;">
+                <div
+                    style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                  Plate
+                </div>
+              </model-viewer>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-full is-hidden-tablet">
+          <div class="columns is-mobile">
+            <!-- 第三个物品 -->
+            <div class="column is-half">
+              <video playsinline autoplay loop muted style="width: 100%; object-fit: cover;">
+                <source src="static/videos/fractura/pot.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column is-half">
+              <model-viewer src="static/models/fractura/pot.glb" camera-controls interaction-prompt="none" auto-rotate
+                            shadow-intensity="1" exposure="0.7"
+                            style="width: 100%; height: calc(100% - 0.375rem); background-color: #f7f7f7; border-radius: 8px; position: relative;">
+                <div
+                    style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                  Pot
+                </div>
+              </model-viewer>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-full is-hidden-tablet">
+          <div class="columns is-mobile">
+            <!-- 第四个物品 -->
+            <div class="column is-half">
+              <video playsinline autoplay loop muted style="width: 100%; object-fit: cover;">
+                <source src="static/videos/fractura/vase1.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column is-half">
+              <model-viewer src="static/models/fractura/vase1.glb" camera-controls interaction-prompt="none" auto-rotate
+                            shadow-intensity="1" exposure="0.7"
+                            style="width: 100%; height: calc(100% - 0.375rem); background-color: #f7f7f7; border-radius: 8px; position: relative;">
+                <div
+                    style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                  Vase
+                </div>
+              </model-viewer>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-full is-hidden-tablet">
+          <div class="columns is-mobile">
+            <!-- 第五个物品 -->
+            <div class="column is-half">
+              <video playsinline autoplay loop muted style="width: 100%; object-fit: cover;">
+                <source src="static/videos/fractura/vase2.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column is-half">
+              <model-viewer src="static/models/fractura/vase2.glb" camera-controls interaction-prompt="none" auto-rotate
+                            shadow-intensity="1" exposure="0.7"
+                            style="width: 100%; height: 100%; background-color: #f7f7f7; border-radius: 8px; position: relative;">
+                <div
+                    style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                  Vase
+                </div>
+              </model-viewer>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content has-text-centered">
+        <div class="notification is-info is-light" style="text-align: justify;">
+          <p>
+            <strong>Note: All fragments shown above are obtained from real 3D scans. </strong>
+            Even when presented with unfamiliar fragments or missing parts, GARF successfully assembles them and
+            accurately aligns their poses.
+            Try rotating and zooming in on the 3D models to see how seamlessly the pieces fit together!All the fragments
+            above are obtained from real scans.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- How it works -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            3D reassembly is a challenging spatial intelligence task with broad applications across scientific domains.
+            While large-scale synthetic datasets have fueled promising learning-based approaches, their generalizability
+            to different domains is limited. Critically, it remains uncertain whether models trained on synthetic
+            datasets can generalize to real-world fractures where breakage patterns are more complex. To bridge this
+            gap, we propose <b>GARF</b>, a <b>g</b>eneralizable 3D re<b>a</b>ssembly framework for <b>r</b>eal-world <b>f</b>ractures.
+            <b>GARF</b> leverages fracture-aware pretraining to learn fracture features from individual fragments, with
+            flow matching enabling precise 6-DoF alignments. At inference time, we introduce one-step preassembly,
+            improving robustness to unseen objects and varying numbers of fractures. In collaboration with
+            archaeologists, paleoanthropologists, and ornithologists, we curate <b>FRACTURA</b>, a diverse dataset for
+            vision and learning communities, featuring real-world fracture types across ceramics, bones, eggshells, and
+            lithics. Comprehensive experiments have shown our approach consistently outperforms state-of-the-art methods
+            on both synthetic and real-world datasets, achieving 82.87% lower rotation error and 25.15% higher part
+            accuracy. This sheds light on training on synthetic data to advance real-world 3D puzzle solving,
+            demonstrating its strong generalization across unseen object shapes and diverse fracture types.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Method Overview -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Methodology</h2>
+        <!-- This image is always visible  -->
+        <div id="overview">
+          <img src="static/images/overview.png" alt="Overview Image">
+        </div>
+        <p id="text-content" style="text-align: justify;">
+          <b>Overall illustration of GARF</b>. Our framework comprises two main components: (i) Fracture-aware
+          pretraining leverages <b>14x</b> more data than previous methods to learn the local fracture features via
+          fracture point segmentation, and (ii) Flow-based reassembly on SE(3) leverages the SO(3) manifold for precise
+          rotation estimation. At inference time, one-step pre-assembly strategy provides better initial poses,
+          enhancing robustness against unseen objects and increasing numbers of fractures.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Visualization Section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Assembly Results</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            Explore our 3D reassembly results interactively. The models below demonstrate how GARF accurately aligns
+            fragments across different material categories. You can <b>rotate, zoom, and inspect the reassembled objects
+            from any angle</b>.
+          </p>
+        </div>
+
+        <h2 class="title is-4">Breaking Bad Dataset</h2>
+        <div class="columns is-mobile is-multiline">
+          <div class="column is-3-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/breakingbad/840.mp4" type="video/mp4">
+            </video>
+            <model-viewer src="static/models/breakingbad/840.glb" camera-controls interaction-prompt="none" auto-rotate
+                          shadow-intensity="1" exposure="0.7"
+                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
+              <div
+                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                Everyday
+              </div>
+            </model-viewer>
+          </div>
+          <div class="column is-3-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/breakingbad/1969.mp4" type="video/mp4">
+            </video>
+            <model-viewer src="static/models/breakingbad/1969.glb" camera-controls interaction-prompt="none" auto-rotate
+                          shadow-intensity="1" exposure="0.7"
+                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
+              <div
+                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                Everyday
+              </div>
+            </model-viewer>
+          </div>
+          <div class="column is-3-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/breakingbad/2493.mp4" type="video/mp4">
+            </video>
+            <model-viewer src="static/models/breakingbad/2493.glb" camera-controls interaction-prompt="none" auto-rotate
+                          shadow-intensity="1" exposure="0.7"
+                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
+              <div
+                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0, 0, 0, 0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                Everyday
+              </div>
+            </model-viewer>
+          </div>
+          <div class="column is-3-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/breakingbad/3774.mp4" type="video/mp4">
+            </video>
+            <model-viewer src="static/models/breakingbad/3774.glb" camera-controls interaction-prompt="none" auto-rotate
+                          shadow-intensity="1" exposure="0.7"
+                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
+              <div
+                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                Everyday
+              </div>
+            </model-viewer>
+          </div>
+        </div>
+
+        <div class="columns is-mobile is-multiline">
+          <div class="column is-3-desktop is-6-mobile</div>">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/breakingbad/1327.mp4" type="video/mp4">
+            </video>
+            <model-viewer src="static/models/breakingbad/1327.glb" camera-controls interaction-prompt="none" auto-rotate
+                          shadow-intensity="1" exposure="0.7"
+                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
+              <div
+                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                Artifact
+              </div>
+            </model-viewer>
+          </div>
+          <div class="column is-3-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/breakingbad/152.mp4" type="video/mp4">
+            </video>
+            <model-viewer src="static/models/breakingbad/152.glb" camera-controls interaction-prompt="none" auto-rotate
+                          shadow-intensity="1" exposure="0.7"
+                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
+              <div
+                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                Artifact
+              </div>
+            </model-viewer>
+          </div>
+          <div class="column is-3-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/breakingbad/1695.mp4" type="video/mp4">
+            </video>
+            <model-viewer src="static/models/breakingbad/1695.glb" camera-controls interaction-prompt="none" auto-rotate
+                          shadow-intensity="1" exposure="0.7"
+                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
+              <div
+                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0, 0, 0, 0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                Artifact
+              </div>
+            </model-viewer>
+          </div>
+          <div class="column is-3-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/breakingbad/2106.mp4" type="video/mp4">
+            </video>
+            <model-viewer src="static/models/breakingbad/2106.glb" camera-controls interaction-prompt="none" auto-rotate
+                          shadow-intensity="1" exposure="0.7"
+                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
+              <div
+                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                Artifact
+              </div>
+            </model-viewer>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Visualization Section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+
+        <h2 class="title is-4">Fractura Dataset (Synthetic Fracture Subset)</h2>
+        <div class="content has-text-justified">
+          <p>
+            Following the simulated fracture method used in Breaking Bad, we also performed simulated breakage on the
+            complete objects in our Fractura dataset.
+          </p>
+        </div>
+        <div class="columns is-mobile is-multiline">
+          <div class="column is-2-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fractura_syn/egg.mp4" type="video/mp4">
+            </video>
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fractura_syn/egg2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-2-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fractura_syn/os_coxae.mp4" type="video/mp4">
+            </video>
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fractura_syn/os_coxae2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-2-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fractura_syn/os_coxae3.mp4" type="video/mp4">
+            </video>
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fractura_syn/vertebrae5.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-2-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fractura_syn/rib.mp4" type="video/mp4">
+            </video>
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fractura_syn/vertebrae.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-2-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fractura_syn/vertebrae1.mp4" type="video/mp4">
+            </video>
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fractura_syn/vertebrae2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-2-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fractura_syn/vertebrae3.mp4" type="video/mp4">
+            </video>
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fractura_syn/vertebrae4.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Visualization Section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+
+        <h2 class="title is-4">Fantastic Break Dataset</h2>
+        <div class="content has-text-justified">
+          <p>
+            Although the objects in the Fantastic Break dataset only break into two pieces, the challenge lies in the
+            fact that the fracture surfaces are obtained from <b>real scans, not simulations.</b>
+          </p>
+        </div>
+        <div class="columns is-mobile is-multiline">
+          <div class="column is-2-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fantastic/123.mp4" type="video/mp4">
+            </video>
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fantastic/141.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-2-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fantastic/94.mp4" type="video/mp4">
+            </video>
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fantastic/97.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-2-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fantastic/82.mp4" type="video/mp4">
+            </video>
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fantastic/88.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-2-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fantastic/31.mp4" type="video/mp4">
+            </video>
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fantastic/69.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-2-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fantastic/30.mp4" type="video/mp4">
+            </video>
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fantastic/29.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-2-desktop is-6-mobile">
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fantastic/7.mp4" type="video/mp4">
+            </video>
+            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
+              <source src="static/videos/fantastic/13.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BibTeX -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <center>
+      <h2 id="bibtexTitle" class="title">BibTeX</h2>
+      <div style="position: relative;">
+        <button id="copyButton" onclick="copyToClipboard()">
+          <i class="fas fa-copy"></i>
+        </button>
+        <pre style="text-align: left; border-radius: 8px;"><code id="bibtexInfo">@inproceedings{li2025garf,
+ title={GARF: Learning Generalizable 3D Reassembly for Real-World Fractures},
+ author={Li, Sihang and Jiang, Zeyu and Chen, Grace and Xu, Chenyang and Tan, Siqi and Wang, Xue and Fang, Irving and Zyskowski, Kristof and McPherron, Shannon P and Iovita, Radu and Feng, Chen and Zhang, Jing},
+ year={2025},
+ booktitle={International Conference on Computer Vision (ICCV)}
+}</code></pre>
+      </div>
+    </center>
+  </div>
+</section>
+
+<!-- Acknowledgements   -->
+<section class="section" id="Acknowledgements">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Acknowledgements</h2>
+    We gratefully acknowledge the Physical Anthropology Unit, Universidad Complutense de Madrid for access to curated
+    human skeletons, and Dr. Scott A. Williams (NYU Anthropology Department) for the processed data samples. This work
+    was supported in part through NSF grants 2152565, 2238968, 2322242, and 2426993, and the NYU IT High Performance
+    Computing resources, services, and staff expertise.
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/"
+                                                target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+            This AI4CE template is created by <a href="https://irvingf7.github.io/" target="_blank">Irving Fang</a>.
+            This webpage template is originally from <a href="https://github.com/nerfies/nerfies.github.io"
+                                                        target="_blank">Nerfies</a>.
+            We sincerely thank <a href="https://keunhong.com/" target="_blank">Keunhong Park</a> for developing and
+            open-sourcing this template.
+            This website is then inspired by the project page of <a
+              href="https://splatmover.github.io/" target="_blank">SplatMover</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+
+</html>
