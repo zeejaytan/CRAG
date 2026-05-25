@@ -1,10 +1,10 @@
 <p align="center">
   <h1 align="center"> CRAG: Can 3D Generative Models Help 3D Assembly? </h1>
-  <p align="center">
+  <h3 align="center">
     <a href="https://icml.cc/" target="_blank" rel="noopener noreferrer">
-      <span style="font-size: 70px; font-weight: bold;">🇰🇷 ICML 2026</span>
+      ICML 2026
     </a>
-  </p>
+  </h3>
 
   <p align="center">
   A unified framework that couples 3D assembly with 3D generation: assembly provides part-level structural priors for generation, while generation injects holistic shape context that resolves ambiguities in assembly — enabling pose prediction <i>and</i> missing-geometry synthesis in a single model.
