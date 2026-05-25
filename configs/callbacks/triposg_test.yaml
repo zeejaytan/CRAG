@@ -1,0 +1,7 @@
+model_summary:
+  _target_: lightning.pytorch.callbacks.RichModelSummary
+  max_depth: 1
+
+visualization_saving:
+  _target_: source.callbacks.triposg_vis_saving.TripoSGVisualizationCallback
+  save_dir: ./output/${experiment_name}/visualizations

@@ -1,0 +1,7 @@
+_target_: source.models.triposg_pure.TripoSGPureModel
+
+pretrained_model_name_or_path: VAST-AI/TripoSG
+num_inference_steps: 50
+guidance_scale: 7.0
+view_index: 0         # which rendered view index to feed to TripoSG
+num_sample_points: 8192  # points sampled from each mesh for Chamfer computation

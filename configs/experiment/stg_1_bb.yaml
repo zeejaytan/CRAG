@@ -1,0 +1,11 @@
+# @package _global_
+
+defaults:
+  - stg_1_partnext
+
+experiment_name: stg_1_bb
+
+data:
+  categories: ["everyday"]
+  data_root:
+    everyday: /dev/shm/breaking_bad.hdf5

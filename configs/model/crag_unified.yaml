@@ -1,0 +1,47 @@
+_target_: source.models.crag_unified.CragUnifiedModel
+_recursive_: False
+pretrained_model_name_or_path: VAST-AI/TripoSG
+noise_scheduler:
+  _target_: source.modules.scheduler.SE3FlowMatchEulerContinuousScheduler
+  sigma_min: 1e-5
+  t_schedule: linear
+transformer_kwargs:
+  assembly_transformer_kwargs:
+    in_dim: ${eval:'64 if ${model.use_post_kl} else 1024 if ${model.use_decoded_features} else 512'}
+    width: 768
+    num_layers: 21
+    num_heads: 8
+    enable_scale_emb: ${data.scale_part_pointcloud}
+    enable_skip: true
+    enable_cross_attention: false
+    cross_attention_dim: 1024
+  generation_pretrained_model_name_or_path: ${model.pretrained_model_name_or_path}
+  generation_transformer_kwargs:
+    subfolder: transformer
+  joint_adapter_kwargs:
+    width: 512
+    num_heads: 8
+    use_cross_attention: ${eval:'True and ${model.enable_generation}'}
+    use_joint_attention: false
+  freeze_generation_transformer: true
+enable_generation: true
+optimizer:
+  _target_: torch.optim.AdamW
+  _convert_: partial
+  lr: 2e-4
+  betas: [0.95, 0.999]
+  weight_decay: 1e-6
+  eps: 1e-8
+lr_scheduler:
+  _target_: source.utils.lr_scheduler.LambdaWarmUpCosineFactorScheduler
+  warm_up_steps: 1000
+  f_start: 1e-6
+  f_min: 1e-3
+  f_max: 1.0
+lr_grouping:
+  assembly_lr: 2e-4
+  generation_lr: 1e-5
+  joint_adapter_lr: 2e-4
+use_decoded_features: false
+use_post_kl: false
+part_scale_ratio: 1.0

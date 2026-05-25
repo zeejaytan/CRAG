@@ -1,0 +1,8 @@
+# @package _global_
+
+defaults:
+  - stg_2_partnext
+
+experiment_name: stg_2_bb
+
+finetune_from: ./output/stg_1_bb/last.ckpt

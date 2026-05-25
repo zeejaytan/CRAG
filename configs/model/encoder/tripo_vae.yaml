@@ -1,0 +1,3 @@
+_target_: source.modules.autoencoders.triposg_varlen_autoencoder.from_pretrained
+pretrained_model_name_or_path: ${model.pretrained_model_name_or_path}
+subfolder: "vae"

@@ -1,0 +1,14 @@
+# @package _global_
+
+defaults:
+  - override /model: triposg_pure
+  - override /data: partnext_eval
+  - override /callbacks: triposg_test
+  - override /loggers: csv
+
+experiment_name: triposg_pure_eval
+
+trainer:
+  devices: [0]
+  num_nodes: 1
+  precision: 32   # run pipeline in full precision; switch to bf16-mixed if OOM

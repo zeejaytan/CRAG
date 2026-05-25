@@ -1,0 +1,29 @@
+_target_: source.datasets.crag.CragDataModule
+data_root:
+  everyday: /state/partition1/job-${oc.env:SLURM_JOB_ID}/breaking_bad.hdf5
+  PartNeXt: /state/partition1/job-${oc.env:SLURM_JOB_ID}/PartNeXt.hdf5
+  morphosource_v1: /state/partition1/job-${oc.env:SLURM_JOB_ID}/morphosource_v1.hdf5
+  morphosource_v2: /state/partition1/job-${oc.env:SLURM_JOB_ID}/morphosource_v2.hdf5
+  skull: /state/partition1/job-${oc.env:SLURM_JOB_ID}/skull.hdf5
+up_axies:
+  everyday: Z
+  PartNeXt: Y
+category_sampling_weights:
+  everyday: 1.0
+  PartNeXt: 1.0
+categories: ["everyday", "PartNeXt", "morphosource_v1", "morphosource_v2", "skull"]
+batch_size: 32
+num_workers: 16
+min_parts: 2
+max_parts: 20
+num_points_per_object: 5000
+num_points_per_part: 1000
+min_points_per_part: 20
+sample_by: constant
+multi_ref: true
+random_anchor: false
+random_rotation: true
+scale_part_pointcloud: true
+pieces_drop_rate: 0.0
+pieces_drop_rate_val: 0.0
+enable_missing_from_meta: false

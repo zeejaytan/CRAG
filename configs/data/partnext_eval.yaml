@@ -1,0 +1,23 @@
+_target_: source.datasets.crag.CragDataModule
+data_root:
+  PartNeXt: /local_data/public/CRAG/final_data/PartNeXt.hdf5
+up_axies:
+  PartNeXt: Y
+category_sampling_weights:
+  PartNeXt: 1.0
+categories: ["PartNeXt"]
+batch_size: 1
+num_workers: 4
+min_parts: 2
+max_parts: 20
+num_points_per_object: 5000
+num_points_per_part: 1000
+min_points_per_part: 20
+sample_by: constant
+multi_ref: true
+random_anchor: false
+random_rotation: false
+scale_part_pointcloud: true
+pieces_drop_rate: 0.0
+pieces_drop_rate_val: 0.0
+enable_missing_from_meta: false

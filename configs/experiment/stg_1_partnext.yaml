@@ -1,0 +1,44 @@
+# @package _global_
+
+defaults:
+  - override /model: crag_unified
+  - override /loggers: wandb
+  - override /data: crag
+
+experiment_name: stg_1_partnext
+tags: ["hpc", "denoiser", "flow_matching"]
+
+trainer:
+  precision: 16-mixed
+  gradient_clip_algorithm: norm
+  gradient_clip_val: 1.0
+  max_epochs: null
+  max_steps: 2e5
+  # check_val_every_n_epoch: 100
+  check_val_every_n_epoch: null
+  val_check_interval: 10000
+  strategy: ddp # we have to turn it on because of warming up on assembly sides
+
+data:
+  sample_by: area
+  num_points_per_object: 20000
+  min_points_per_part: 512
+  num_points_per_part: 2048
+  random_rotation: true
+  batch_size: 8
+  max_parts: 20
+  scale_part_pointcloud: false
+  pieces_drop_rate: 0.1
+  categories: ["PartNeXt"]
+  data_root:
+    PartNeXt: /dev/shm/PartNeXt.hdf5
+
+model:
+  pretrained_model_name_or_path: ./pretrained/TripoSG
+  image_drop_rate: 0.1
+  transformer_kwargs:
+    freeze_generation_transformer: true
+  enable_generation: false
+  use_decoded_features: true
+
+compile: false

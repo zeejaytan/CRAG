@@ -1,0 +1,19 @@
+_target_: craftsman.models.autoencoders.michelangelo_autoencoder.MichelangeloAutoencoder
+cfg:
+  pretrained_model_name_or_path: ./pretrained/Seed3D/Dora-VAE-1.1/dora_vae_1_1.ckpt
+  embed_dim: 64
+  point_feats: 3
+  out_dim: 1 
+  embed_type: "fourier"
+  num_freqs: 8
+  include_pi: false
+  heads: 12
+  width: 768
+  num_encoder_layers: 8
+  num_decoder_layers: 16
+  use_ln_post: true
+  init_scale: 0.25
+  qkv_bias: false
+  use_flash: true
+  use_checkpoint: true
+  use_downsample: true

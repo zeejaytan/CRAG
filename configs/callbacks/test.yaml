@@ -1,0 +1,11 @@
+model_summary:
+  _target_: lightning.pytorch.callbacks.RichModelSummary
+
+# rerun_visualization:
+#   _target_: source.callbacks.rerun_vis.RerunVisualizationCallback
+#   application_id: vis
+#   grpc_port: 1116
+
+visualization_saving:
+  _target_: source.callbacks.vis_saving.VisualizationSavingCallback
+  save_dir: ./output/${experiment_name}/visualizations

@@ -1,0 +1,29 @@
+# @package _global_
+
+defaults:
+  - stg_1_partnext
+
+experiment_name: stg_2_partnext
+
+finetune_from: ./output/stg_1_partnext/last.ckpt
+
+data:
+  batch_size: 4
+
+trainer:
+  max_steps: 1e5
+
+model:
+  image_drop_rate: 0.5
+  enable_generation: true
+  transformer_kwargs:
+    freeze_generation_transformer: false
+  lr_grouping:
+    assembly_lr: 2e-4
+    generation_lr: 1e-5
+    joint_adapter_lr: 2e-4
+
+lr_grouping:
+  assembly_lr: 1e-4
+  generation_lr: 1e-4
+  joint_adapter_lr: 1e-4
