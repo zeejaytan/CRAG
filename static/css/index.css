@@ -339,3 +339,272 @@ video {
     color: white;
     visibility: hidden;
 }
+
+/* ===== Teaser visualization (Condition / Image / Generation / Assembly) ===== */
+
+#teaser-viz {
+    padding-top: 2.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.teaser-viz-card {
+    border: 1px solid #e6e9f0;
+    border-radius: 18px;
+    padding: 28px 28px 22px;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(31, 59, 139, 0.06);
+}
+
+.teaser-viz-headers {
+    margin-bottom: 0 !important;
+}
+
+.teaser-viz-title {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1d1d1f;
+    margin-bottom: 8px;
+}
+
+.teaser-viz-optional {
+    font-weight: 400;
+    color: #6b7280;
+    font-size: 0.95rem;
+}
+
+.teaser-viz-pill {
+    display: inline-block;
+    padding: 6px 16px;
+    background: #eef1ff;
+    color: #1f3b8b;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.teaser-viz-row {
+    margin-top: 0.75rem !important;
+    position: relative;
+}
+
+.teaser-arrow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px;
+    height: 28px;
+    pointer-events: none;
+    z-index: 3;
+    /* Slightly lift it out of the gray viewer backdrop for visibility. */
+    filter: drop-shadow(0 1px 2px rgba(31, 59, 139, 0.10));
+}
+
+@media (max-width: 768px) {
+    /* On mobile the 4 columns reflow to 2x2, so an arrow between cols 2 and 3
+       would land between rows, not between Image and Generation. Hide it. */
+    .teaser-arrow {
+        display: none;
+    }
+}
+
+.teaser-mv {
+    width: 100%;
+    height: 280px;
+    background-color: #f7f7fa;
+    border-radius: 12px;
+    --poster-color: #f7f7fa;
+}
+
+.teaser-img {
+    width: 100%;
+    height: 280px;
+    object-fit: contain;
+    background-color: #f7f7fa;
+    border-radius: 12px;
+    display: block;
+}
+
+/* The user-agent default [hidden] { display: none } loses to the rules above
+   in author specificity, so re-assert it explicitly. */
+.teaser-img[hidden],
+.teaser-img-na[hidden],
+.teaser-viz-pill[hidden] {
+    display: none;
+}
+
+.teaser-img-na {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+.teaser-viz-caption {
+    margin: 0.5rem 0 1.25rem;
+    text-align: center;
+    color: #4b5563;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.teaser-viz-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.teaser-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    background: #eef1ff;
+    color: #1f3b8b;
+    border: 1.5px solid transparent;
+    border-radius: 999px;
+    padding: 8px 22px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Noto Sans', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.05s ease;
+}
+
+.teaser-btn:hover {
+    background: #e1e7ff;
+}
+
+.teaser-btn:active {
+    transform: translateY(1px);
+}
+
+.teaser-btn.is-active {
+    background: #ffffff;
+    border-color: #1f3b8b;
+    color: #1f3b8b;
+}
+
+@media (max-width: 768px) {
+    .teaser-mv,
+    .teaser-img {
+        height: 220px;
+    }
+    .teaser-viz-card {
+        padding: 18px 14px;
+    }
+}
+
+/* Main quantitative-results figure under the Assembly Results heading. */
+.main-experiment-figure {
+    margin: 0 auto 2.25rem;
+    text-align: center;
+}
+
+.main-experiment-figure img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.main-experiment-figure figcaption {
+    margin: 0.85rem auto 0;
+    max-width: 880px;
+    text-align: justify;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: #4b5563;
+}
+
+.main-experiment-figure figcaption b {
+    color: #1d1d1f;
+}
+
+/* ===== Five-method qualitative comparison grid ===== */
+
+.assembly-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 0.5rem;
+}
+
+.assembly-grid-header,
+.assembly-grid-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.assembly-grid-header {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    background: #ffffffee;
+    backdrop-filter: saturate(160%) blur(6px);
+    padding: 10px 0;
+    border-bottom: 1px solid #e6e9f0;
+}
+
+.assembly-grid-header > div {
+    text-align: center;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #1f3b8b;
+    letter-spacing: 0.01em;
+}
+
+.assembly-mv {
+    width: 100%;
+    height: 200px;
+    background-color: #f7f7fa;
+    border-radius: 10px;
+    --poster-color: #f7f7fa;
+}
+
+/* 4-column variant for the Generation-with-image-condition grid. */
+.assembly-grid-header.gen4-header,
+.assembly-grid-row.gen4-row {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Image cell stamped onto an .assembly-mv-sized box so the <img> aligns with
+   neighboring <model-viewer> cells in the row. */
+img.assembly-img-cell {
+    object-fit: contain;
+    display: block;
+}
+
+/* N/A placeholder for rows that have no reference image. Reuses .assembly-mv
+   dimensions/background; just centers a muted "N/A" label. */
+.assembly-na-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+@media (max-width: 768px) {
+    /* On phones, 5 columns at 200px tall is unreadable; collapse to a single
+       column so each viewer is full-width and the row label stays adjacent. */
+    .assembly-grid-header,
+    .assembly-grid-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    .assembly-mv {
+        height: 180px;
+    }
+}

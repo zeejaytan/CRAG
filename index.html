@@ -240,29 +240,6 @@
   <div class="columns is-centered has-text-centered">
     <div class="column is-full-width teaser">
 
-      <!-- <div class="swiper swiper1" style="max-height: 400px; margin-bottom: 1rem;">
-        <div class="swiper-wrapper">
-          <video muted autoplay loop controls class="swiper-slide" style="max-height: 400px; object-fit: contain;">
-            <source src="static/videos/fractura/bowl.mp4" type="video/mp4">
-          </video>
-          <video muted autoplay loop controls class="swiper-slide" style="max-height: 400px; object-fit: contain;">
-            <source src="static/videos/fractura/plate.mp4" type="video/mp4">
-          </video>
-          <video muted autoplay loop controls class="swiper-slide" style="max-height: 400px; object-fit: contain;">
-            <source src="static/videos/fractura/pot.mp4" type="video/mp4">
-          </video>
-          <video muted autoplay loop controls class="swiper-slide" style="max-height: 400px; object-fit: contain;">
-            <source src="static/videos/fractura/vase1.mp4" type="video/mp4">
-          </video>
-          <video muted autoplay loop controls class="swiper-slide" style="max-height: 400px; object-fit: contain;"></video>
-            <source src="static/videos/fractura/vase2.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      </div> -->
-
       <p class="tldr" style="font-size: 18px">
         <b>CRAG</b> shows that assembly and generation are mutually reinforcing: assembly provides part-level structural
         priors for generation, while generation injects holistic shape context that resolves ambiguities in assembly.
@@ -272,203 +249,140 @@
 </div>
 </section>
 
-<!-- Visualization Section -->
-<section class="section">
+<!-- Teaser Visualization -->
+<section class="section" id="teaser-viz">
   <div class="container is-max-desktop">
-    <div class="columns is-multiline is-mobile has-text-centered">
-      <div class="columns is-multiline">
-        <div class="column is-one-fifth is-hidden-mobile">
-          <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-            <source src="static/videos/fractura/bowl.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-one-fifth is-hidden-mobile">
-          <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-            <source src="static/videos/fractura/plate.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-one-fifth is-hidden-mobile">
-          <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-            <source src="static/videos/fractura/pot.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-one-fifth is-hidden-mobile">
-          <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-            <source src="static/videos/fractura/vase1.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-one-fifth is-hidden-mobile">
-          <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-            <source src="static/videos/fractura/vase2.mp4" type="video/mp4">
-          </video>
-        </div>
+    <div class="teaser-viz-card">
 
-        <div class="column is-one-fifth is-hidden-mobile">
-          <model-viewer src="static/models/fractura/bowl.glb" camera-controls interaction-prompt="none" auto-rotate
-                        shadow-intensity="1" exposure="0.7"
-                        style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
-            <div
-                style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-              Bowl
-            </div>
-          </model-viewer>
+      <div class="columns is-multiline is-mobile is-vcentered has-text-centered teaser-viz-headers">
+        <div class="column is-one-quarter-tablet is-half-mobile">
+          <h3 class="teaser-viz-title">Condition</h3>
+          <div class="teaser-viz-pill">Unposed Part Point Clouds</div>
         </div>
-        <div class="column is-one-fifth is-hidden-mobile">
-          <model-viewer src="static/models/fractura/plate.glb" camera-controls interaction-prompt="none" auto-rotate
-                        shadow-intensity="1" exposure="0.7"
-                        style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
-            <div
-                style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-              Plate
-            </div>
-          </model-viewer>
+        <div class="column is-one-quarter-tablet is-half-mobile">
+          <h3 class="teaser-viz-title">Image <span class="teaser-viz-optional">(optional)</span></h3>
+          <div id="teaser-image-pill" class="teaser-viz-pill">Reference View</div>
         </div>
-        <div class="column is-one-fifth is-hidden-mobile">
-          <model-viewer src="static/models/fractura/pot.glb" camera-controls interaction-prompt="none" auto-rotate
-                        shadow-intensity="1" exposure="0.7"
-                        style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
-            <div
-                style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-              Pot
-            </div>
-          </model-viewer>
+        <div class="column is-one-quarter-tablet is-half-mobile">
+          <h3 class="teaser-viz-title">Generation</h3>
+          <div class="teaser-viz-pill">Generated Complete Shape</div>
         </div>
-        <div class="column is-one-fifth is-hidden-mobile">
-          <model-viewer src="static/models/fractura/vase1.glb" camera-controls interaction-prompt="none" auto-rotate
-                        shadow-intensity="1" exposure="0.7"
-                        style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
-            <div
-                style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-              Vase
-            </div>
-          </model-viewer>
-        </div>
-        <div class="column is-one-fifth is-hidden-mobile">
-          <model-viewer src="static/models/fractura/vase2.glb" camera-controls interaction-prompt="none" auto-rotate
-                        shadow-intensity="1" exposure="0.7"
-                        style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
-            <div
-                style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-              Vase
-            </div>
-          </model-viewer>
-        </div>
-
-        <div class="column is-full is-hidden-tablet">
-          <div class="columns is-mobile">
-            <div class="column is-half">
-              <video playsinline autoplay loop muted style="width: 100%; object-fit: cover;">
-                <source src="static/videos/fractura/bowl.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="column is-half">
-              <model-viewer src="static/models/fractura/bowl.glb" camera-controls interaction-prompt="none" auto-rotate
-                            shadow-intensity="1" exposure="0.7"
-                            style="width: 100%; height: calc(100% - 0.375rem); background-color: #f7f7f7; border-radius: 8px; position: relative;">
-                <div
-                    style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-                  Bowl
-                </div>
-              </model-viewer>
-            </div>
-          </div>
-        </div>
-
-        <div class="column is-full is-hidden-tablet">
-          <div class="columns is-mobile">
-            <div class="column is-half">
-              <video playsinline autoplay loop muted style="width: 100%; object-fit: cover;">
-                <source src="static/videos/fractura/plate.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="column is-half">
-              <model-viewer src="static/models/fractura/plate.glb" camera-controls interaction-prompt="none" auto-rotate
-                            shadow-intensity="1" exposure="0.7"
-                            style="width: 100%; height: calc(100% - 0.375rem); background-color: #f7f7f7; border-radius: 8px; position: relative;">
-                <div
-                    style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-                  Plate
-                </div>
-              </model-viewer>
-            </div>
-          </div>
-        </div>
-
-        <div class="column is-full is-hidden-tablet">
-          <div class="columns is-mobile">
-            <div class="column is-half">
-              <video playsinline autoplay loop muted style="width: 100%; object-fit: cover;">
-                <source src="static/videos/fractura/pot.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="column is-half">
-              <model-viewer src="static/models/fractura/pot.glb" camera-controls interaction-prompt="none" auto-rotate
-                            shadow-intensity="1" exposure="0.7"
-                            style="width: 100%; height: calc(100% - 0.375rem); background-color: #f7f7f7; border-radius: 8px; position: relative;">
-                <div
-                    style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-                  Pot
-                </div>
-              </model-viewer>
-            </div>
-          </div>
-        </div>
-
-        <div class="column is-full is-hidden-tablet">
-          <div class="columns is-mobile">
-            <div class="column is-half">
-              <video playsinline autoplay loop muted style="width: 100%; object-fit: cover;">
-                <source src="static/videos/fractura/vase1.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="column is-half">
-              <model-viewer src="static/models/fractura/vase1.glb" camera-controls interaction-prompt="none" auto-rotate
-                            shadow-intensity="1" exposure="0.7"
-                            style="width: 100%; height: calc(100% - 0.375rem); background-color: #f7f7f7; border-radius: 8px; position: relative;">
-                <div
-                    style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-                  Vase
-                </div>
-              </model-viewer>
-            </div>
-          </div>
-        </div>
-
-        <div class="column is-full is-hidden-tablet">
-          <div class="columns is-mobile">
-            <div class="column is-half">
-              <video playsinline autoplay loop muted style="width: 100%; object-fit: cover;">
-                <source src="static/videos/fractura/vase2.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="column is-half">
-              <model-viewer src="static/models/fractura/vase2.glb" camera-controls interaction-prompt="none" auto-rotate
-                            shadow-intensity="1" exposure="0.7"
-                            style="width: 100%; height: 100%; background-color: #f7f7f7; border-radius: 8px; position: relative;">
-                <div
-                    style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-                  Vase
-                </div>
-              </model-viewer>
-            </div>
-          </div>
+        <div class="column is-one-quarter-tablet is-half-mobile">
+          <h3 class="teaser-viz-title">Assembly</h3>
+          <div class="teaser-viz-pill">Predicted Assembled Parts</div>
         </div>
       </div>
-      <div class="content has-text-centered">
-        <div class="notification is-info is-light" style="text-align: justify;">
-          <p>
-            <strong>Note: All fragments shown above are obtained from real 3D scans. </strong>
-            Even when presented with unfamiliar fragments or missing parts, CRAG successfully assembles them and
-            accurately aligns their poses.
-            Try rotating and zooming in on the 3D models to see how seamlessly the pieces fit together!All the fragments
-            above are obtained from real scans.
-          </p>
+
+      <div class="columns is-multiline is-mobile has-text-centered teaser-viz-row">
+        <div class="column is-one-quarter-tablet is-half-mobile">
+          <model-viewer id="teaser-condition" class="teaser-mv"
+                        src="static/models/partnext/1/view_input_colored.glb"
+                        camera-controls interaction-prompt="none" auto-rotate
+                        shadow-intensity="1" exposure="0.7"></model-viewer>
+        </div>
+        <div class="column is-one-quarter-tablet is-half-mobile">
+          <img id="teaser-image" class="teaser-img"
+               src="static/models/partnext/1/view_9.png" alt="Reference view">
+          <div id="teaser-image-na" class="teaser-img teaser-img-na" hidden>
+            <span>N/A</span>
+          </div>
+        </div>
+        <div class="column is-one-quarter-tablet is-half-mobile">
+          <model-viewer id="teaser-generation" class="teaser-mv"
+                        src="static/models/partnext/1/view_9.glb"
+                        camera-controls interaction-prompt="none" auto-rotate
+                        shadow-intensity="1" exposure="0.7"></model-viewer>
+        </div>
+        <div class="column is-one-quarter-tablet is-half-mobile">
+          <model-viewer id="teaser-assembly" class="teaser-mv"
+                        src="static/models/partnext/1/view_assembly_9_colored.glb"
+                        camera-controls interaction-prompt="none" auto-rotate
+                        shadow-intensity="1" exposure="0.7"></model-viewer>
+        </div>
+
+        <!-- Arrow between Image (input) and Generation (output). Hidden on mobile,
+             where the 4 columns reflow into 2x2 and "between" no longer applies. -->
+        <div class="teaser-arrow" aria-hidden="true">
+          <svg viewBox="0 0 72 32" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="teaserArrowGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"  stop-color="#dfe6ff"/>
+                <stop offset="100%" stop-color="#c3cdf2"/>
+              </linearGradient>
+            </defs>
+            <line x1="4" y1="16" x2="56" y2="16"
+                  stroke="url(#teaserArrowGrad)" stroke-width="4" stroke-linecap="round"/>
+            <polyline points="48,6 62,16 48,26" fill="none"
+                      stroke="url(#teaserArrowGrad)" stroke-width="4"
+                      stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
         </div>
       </div>
+
+      <p class="teaser-viz-caption">
+        From a set of unposed parts (left) and an optional reference image, CRAG jointly generates a
+        complete shape and predicts the assembled pose for each part. Corresponding parts share
+        colors across the Condition and Assembly views. Orbit any viewer to inspect from different
+        angles, and use the buttons below to switch examples.
+      </p>
+
+      <div class="teaser-viz-buttons has-text-centered">
+        <button type="button" class="teaser-btn is-active"
+                data-path="static/models/partnext/1/" data-suffix="9">Chair</button>
+        <button type="button" class="teaser-btn"
+                data-path="static/models/partnext/2/" data-suffix="9">Teapot</button>
+        <button type="button" class="teaser-btn"
+                data-path="static/models/partnext/3/" data-suffix="9">Monitor</button>
+        <button type="button" class="teaser-btn"
+                data-path="static/models/bone/talus/" data-suffix="9">Talus</button>
+        <button type="button" class="teaser-btn"
+                data-path="static/models/breakingbad/fractured_50/" data-suffix="-1" data-no-image>Kettle</button>
+      </div>
+
     </div>
   </div>
 </section>
 
+<script>
+(function () {
+  // Per-part macaron colors are baked into the *_colored.glb files by
+  // scripts/recolor_partnext.py — re-run that script to change the palette.
+  const condition  = document.getElementById('teaser-condition');
+  const image      = document.getElementById('teaser-image');
+  const imageNA    = document.getElementById('teaser-image-na');
+  const imagePill  = document.getElementById('teaser-image-pill');
+  const generation = document.getElementById('teaser-generation');
+  const assembly   = document.getElementById('teaser-assembly');
+
+  document.querySelectorAll('.teaser-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const base = btn.dataset.path;
+      if (!base) return;
+      const suffix  = btn.dataset.suffix || '9';
+      const noImage = btn.hasAttribute('data-no-image');
+
+      document.querySelectorAll('.teaser-btn').forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+
+      condition.src  = base + 'view_input_colored.glb';
+      generation.src = base + 'view_' + suffix + '.glb';
+      assembly.src   = base + 'view_assembly_' + suffix + '_colored.glb';
+
+      if (noImage) {
+        image.hidden = true;
+        image.removeAttribute('src');
+        imageNA.hidden = false;
+        imagePill.hidden = true;
+      } else {
+        image.src = base + 'view_' + suffix + '.png';
+        image.hidden = false;
+        imageNA.hidden = true;
+        imagePill.hidden = false;
+      }
+    });
+  });
+})();
+</script>
 
 <!-- How it works -->
 <section class="section">
@@ -532,114 +446,78 @@
           </p>
         </div>
 
-        <h2 class="title is-4">Breaking Bad Dataset</h2>
-        <div class="columns is-mobile is-multiline">
-          <div class="column is-3-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/breakingbad/840.mp4" type="video/mp4">
-            </video>
-            <model-viewer src="static/models/breakingbad/840.glb" camera-controls interaction-prompt="none" auto-rotate
-                          shadow-intensity="1" exposure="0.7"
-                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
-              <div
-                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-                Everyday
-              </div>
-            </model-viewer>
-          </div>
-          <div class="column is-3-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/breakingbad/1969.mp4" type="video/mp4">
-            </video>
-            <model-viewer src="static/models/breakingbad/1969.glb" camera-controls interaction-prompt="none" auto-rotate
-                          shadow-intensity="1" exposure="0.7"
-                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
-              <div
-                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-                Everyday
-              </div>
-            </model-viewer>
-          </div>
-          <div class="column is-3-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/breakingbad/2493.mp4" type="video/mp4">
-            </video>
-            <model-viewer src="static/models/breakingbad/2493.glb" camera-controls interaction-prompt="none" auto-rotate
-                          shadow-intensity="1" exposure="0.7"
-                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
-              <div
-                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0, 0, 0, 0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-                Everyday
-              </div>
-            </model-viewer>
-          </div>
-          <div class="column is-3-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/breakingbad/3774.mp4" type="video/mp4">
-            </video>
-            <model-viewer src="static/models/breakingbad/3774.glb" camera-controls interaction-prompt="none" auto-rotate
-                          shadow-intensity="1" exposure="0.7"
-                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
-              <div
-                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-                Everyday
-              </div>
-            </model-viewer>
-          </div>
+        <figure class="main-experiment-figure">
+          <img src="static/images/main_experiment.png"
+               alt="Quantitative comparison on PartNeXt and Breaking Bad: CRAG vs. baselines under complete and missing part-status settings.">
+          <figcaption>
+            <b>Table 1.</b> Quantitative comparison on PartNeXt and Breaking Bad under two part-status
+            settings: <i>Complete</i> (all parts observed) and <i>Missing</i> (with missing parts).
+            CRAG consistently achieves the best overall performance across datasets and remains
+            robust in the challenging missing-part setting. The <b>best</b> and <u>second best</u>
+            results are highlighted.
+          </figcaption>
+        </figure>
+
+        <h2 class="title is-4">Qualitative Comparison</h2>
+        <div class="content has-text-justified mb-4">
+          <p>
+            Each row is the same shape reassembled by five methods. Corresponding parts share
+            the same color across the entire row, so part-level errors stand out at a glance.
+            Models are loaded lazily as you scroll — orbit any viewer to inspect the assembly
+            from a different angle.
+          </p>
         </div>
 
-        <div class="columns is-mobile is-multiline">
-          <div class="column is-3-desktop is-6-mobile</div>">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/breakingbad/1327.mp4" type="video/mp4">
-            </video>
-            <model-viewer src="static/models/breakingbad/1327.glb" camera-controls interaction-prompt="none" auto-rotate
-                          shadow-intensity="1" exposure="0.7"
-                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
-              <div
-                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-                Artifact
-              </div>
-            </model-viewer>
+        <div class="assembly-grid">
+          <div class="assembly-grid-header">
+            <div>Ground Truth</div>
+            <div>CRAG</div>
+            <div>Assembler</div>
+            <div>GARF</div>
+            <div>RPF</div>
           </div>
-          <div class="column is-3-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/breakingbad/152.mp4" type="video/mp4">
-            </video>
-            <model-viewer src="static/models/breakingbad/152.glb" camera-controls interaction-prompt="none" auto-rotate
-                          shadow-intensity="1" exposure="0.7"
-                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
-              <div
-                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-                Artifact
-              </div>
-            </model-viewer>
+
+          <!-- Within each row, all five viewers point at the same shape-id stem;
+               scripts/recolor_assembly.py bakes a canonical per-part palette so
+               equivalent parts share colors across methods. -->
+          <div class="assembly-grid-row">
+            <model-viewer src="static/assembly/gt/0c409bce_colored.glb"        loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/crag/0c409bce_colored.glb"      loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/assembler/0c409bce_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/garf/0c409bce_colored.glb"      loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/rpf/0c409bce_colored.glb"       loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
           </div>
-          <div class="column is-3-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/breakingbad/1695.mp4" type="video/mp4">
-            </video>
-            <model-viewer src="static/models/breakingbad/1695.glb" camera-controls interaction-prompt="none" auto-rotate
-                          shadow-intensity="1" exposure="0.7"
-                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
-              <div
-                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0, 0, 0, 0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-                Artifact
-              </div>
-            </model-viewer>
+
+          <div class="assembly-grid-row">
+            <model-viewer src="static/assembly/gt/37f56901_colored.glb"        loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/crag/37f56901_colored.glb"      loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/assembler/37f56901_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/garf/37f56901_colored.glb"      loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/rpf/37f56901_colored.glb"       loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
           </div>
-          <div class="column is-3-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/breakingbad/2106.mp4" type="video/mp4">
-            </video>
-            <model-viewer src="static/models/breakingbad/2106.glb" camera-controls interaction-prompt="none" auto-rotate
-                          shadow-intensity="1" exposure="0.7"
-                          style="width: 100%; height: 200px; background-color: #f7f7f7; border-radius: 8px; position: relative;">
-              <div
-                  style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.3); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-                Artifact
-              </div>
-            </model-viewer>
+
+          <div class="assembly-grid-row">
+            <model-viewer src="static/assembly/gt/73544_colored.glb"        loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/crag/73544_colored.glb"      loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/assembler/73544_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/garf/73544_colored.glb"      loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/rpf/73544_colored.glb"       loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+          </div>
+
+          <div class="assembly-grid-row">
+            <model-viewer src="static/assembly/gt/102021_colored.glb"        loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/crag/102021_colored.glb"      loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/assembler/102021_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/garf/102021_colored.glb"      loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/rpf/102021_colored.glb"       loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+          </div>
+
+          <div class="assembly-grid-row">
+            <model-viewer src="static/assembly/gt/AMNH_216242_Galago-crassicaudatus_Left-Ast_Smooth_colored.glb"        loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/crag/AMNH_216242_Galago-crassicaudatus_Left-Ast_Smooth_colored.glb"      loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/assembler/AMNH_216242_Galago-crassicaudatus_Left-Ast_Smooth_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/garf/AMNH_216242_Galago-crassicaudatus_Left-Ast_Smooth_colored.glb"      loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/assembly/rpf/AMNH_216242_Galago-crassicaudatus_Left-Ast_Smooth_colored.glb"       loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
           </div>
         </div>
 
@@ -648,135 +526,178 @@
   </div>
 </section>
 
-<!-- Visualization Section -->
+<!-- Generation Results -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
+        <h2 class="title is-3">Generation Results</h2>
 
-        <h2 class="title is-4">Fractura Dataset (Synthetic Fracture Subset)</h2>
-        <div class="content has-text-justified">
+        <figure class="main-experiment-figure">
+          <img src="static/images/generation_experiment.png"
+               alt="Generation quality on the PartNeXt evaluation set: CRAG vs. TripoSG vs. CRAG w/o image, across CD, F-score, EMD, and failure rate.">
+          <figcaption>
+            <b>Table 3.</b> Generation quality on the PartNeXt evaluation set (4,626 shapes).
+            Part-level evidence from the assembly branch substantially improves
+            image-conditioned generation across all metrics and prevents the VAE-decoding
+            failures observed in image-only TripoSG.
+          </figcaption>
+        </figure>
+
+        <h2 class="title is-4">Qualitative Comparison &mdash; Generation with Image Condition</h2>
+        <div class="content has-text-justified mb-4">
           <p>
-            Following the simulated fracture method used in Breaking Bad, we also performed simulated breakage on the
-            complete objects in our Fractura dataset.
+            Each row shows the unposed input parts, the reference image used to condition
+            generation, CRAG&rsquo;s generated complete shape, and the ground truth. Parts in the
+            Condition viewer carry baked macaron colors so individual fragments are easy to
+            track. Models load lazily as you scroll &mdash; orbit any viewer to inspect from a
+            different angle.
           </p>
         </div>
-        <div class="columns is-mobile is-multiline">
-          <div class="column is-2-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fractura_syn/egg.mp4" type="video/mp4">
-            </video>
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fractura_syn/egg2.mp4" type="video/mp4">
-            </video>
+
+        <div class="assembly-grid">
+          <div class="assembly-grid-header gen4-header">
+            <div>Condition</div>
+            <div>Image</div>
+            <div>Generation</div>
+            <div>Ground Truth</div>
           </div>
-          <div class="column is-2-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fractura_syn/os_coxae.mp4" type="video/mp4">
-            </video>
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fractura_syn/os_coxae2.mp4" type="video/mp4">
-            </video>
+
+          <!-- 10 rows × 4 columns. Within each row all four cells point at the same
+               shape directory under static/generation_img/; only the Condition GLB is
+               color-baked (by scripts/recolor_partnext.py), the rest render in the
+               default gray. -->
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_img/beerbottle/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <img src="static/generation_img/beerbottle/view_9.png" class="assembly-mv assembly-img-cell" alt="reference view" loading="lazy">
+            <model-viewer src="static/generation_img/beerbottle/view_9.glb"             loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_img/beerbottle/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
           </div>
-          <div class="column is-2-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fractura_syn/os_coxae3.mp4" type="video/mp4">
-            </video>
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fractura_syn/vertebrae5.mp4" type="video/mp4">
-            </video>
+
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_img/bown/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <img src="static/generation_img/bown/view_9.png" class="assembly-mv assembly-img-cell" alt="reference view" loading="lazy">
+            <model-viewer src="static/generation_img/bown/view_9.glb"             loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_img/bown/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
           </div>
-          <div class="column is-2-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fractura_syn/rib.mp4" type="video/mp4">
-            </video>
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fractura_syn/vertebrae.mp4" type="video/mp4">
-            </video>
+
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_img/spoon/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <img src="static/generation_img/spoon/view_9.png" class="assembly-mv assembly-img-cell" alt="reference view" loading="lazy">
+            <model-viewer src="static/generation_img/spoon/view_9.glb"             loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_img/spoon/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
           </div>
-          <div class="column is-2-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fractura_syn/vertebrae1.mp4" type="video/mp4">
-            </video>
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fractura_syn/vertebrae2.mp4" type="video/mp4">
-            </video>
+
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_img/0a3d54c6c030444aaa334ba6db9110f6/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <img src="static/generation_img/0a3d54c6c030444aaa334ba6db9110f6/view_9.png" class="assembly-mv assembly-img-cell" alt="reference view" loading="lazy">
+            <model-viewer src="static/generation_img/0a3d54c6c030444aaa334ba6db9110f6/view_9.glb"             loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_img/0a3d54c6c030444aaa334ba6db9110f6/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
           </div>
-          <div class="column is-2-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fractura_syn/vertebrae3.mp4" type="video/mp4">
-            </video>
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fractura_syn/vertebrae4.mp4" type="video/mp4">
-            </video>
+
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_img/0a9d96e62a5245a59f00a546c1e69a12/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <img src="static/generation_img/0a9d96e62a5245a59f00a546c1e69a12/view_9.png" class="assembly-mv assembly-img-cell" alt="reference view" loading="lazy">
+            <model-viewer src="static/generation_img/0a9d96e62a5245a59f00a546c1e69a12/view_9.glb"             loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_img/0a9d96e62a5245a59f00a546c1e69a12/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+          </div>
+
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_img/0ac6af36ac6a4502a58275a5079048ff/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <img src="static/generation_img/0ac6af36ac6a4502a58275a5079048ff/view_9.png" class="assembly-mv assembly-img-cell" alt="reference view" loading="lazy">
+            <model-viewer src="static/generation_img/0ac6af36ac6a4502a58275a5079048ff/view_9.glb"             loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_img/0ac6af36ac6a4502a58275a5079048ff/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+          </div>
+
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_img/0af130ac34bd4ea284606f1820ca2578/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <img src="static/generation_img/0af130ac34bd4ea284606f1820ca2578/view_9.png" class="assembly-mv assembly-img-cell" alt="reference view" loading="lazy">
+            <model-viewer src="static/generation_img/0af130ac34bd4ea284606f1820ca2578/view_9.glb"             loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_img/0af130ac34bd4ea284606f1820ca2578/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+          </div>
+
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_img/0e1fa6d6afde445f981e0f4c6473b7e2/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <img src="static/generation_img/0e1fa6d6afde445f981e0f4c6473b7e2/view_9.png" class="assembly-mv assembly-img-cell" alt="reference view" loading="lazy">
+            <model-viewer src="static/generation_img/0e1fa6d6afde445f981e0f4c6473b7e2/view_9.glb"             loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_img/0e1fa6d6afde445f981e0f4c6473b7e2/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+          </div>
+
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_img/0e294f50ff6c4db5b87b1693cf316d6b/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <img src="static/generation_img/0e294f50ff6c4db5b87b1693cf316d6b/view_9.png" class="assembly-mv assembly-img-cell" alt="reference view" loading="lazy">
+            <model-viewer src="static/generation_img/0e294f50ff6c4db5b87b1693cf316d6b/view_9.glb"             loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_img/0e294f50ff6c4db5b87b1693cf316d6b/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+          </div>
+
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_img/0f95c13e132344dea539440a918acfd5/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <img src="static/generation_img/0f95c13e132344dea539440a918acfd5/view_9.png" class="assembly-mv assembly-img-cell" alt="reference view" loading="lazy">
+            <model-viewer src="static/generation_img/0f95c13e132344dea539440a918acfd5/view_9.glb"             loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_img/0f95c13e132344dea539440a918acfd5/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- Visualization Section -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-full-width">
-
-        <h2 class="title is-4">Fantastic Break Dataset</h2>
-        <div class="content has-text-justified">
+        <h2 class="title is-4 mt-6">Qualitative Comparison &mdash; Generation without Image Condition</h2>
+        <div class="content has-text-justified mb-4">
           <p>
-            Although the objects in the Fantastic Break dataset only break into two pieces, the challenge lies in the
-            fact that the fracture surfaces are obtained from <b>real scans, not simulations.</b>
+            Same four-column layout, but here CRAG receives no reference image &mdash; the
+            generation is driven purely by the part-level evidence on the left. The Image
+            column is therefore marked N/A.
           </p>
         </div>
-        <div class="columns is-mobile is-multiline">
-          <div class="column is-2-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fantastic/123.mp4" type="video/mp4">
-            </video>
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fantastic/141.mp4" type="video/mp4">
-            </video>
+
+        <div class="assembly-grid">
+          <div class="assembly-grid-header gen4-header">
+            <div>Condition</div>
+            <div>Image</div>
+            <div>Generation</div>
+            <div>Ground Truth</div>
           </div>
-          <div class="column is-2-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fantastic/94.mp4" type="video/mp4">
-            </video>
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fantastic/97.mp4" type="video/mp4">
-            </video>
+
+          <!-- 6 rows × 4 columns. No PNG inputs for this set, so the Image cell is a
+               static N/A placeholder. Generation/GT GLBs render in default gray;
+               Condition uses the macaron-baked view_input_colored.glb. -->
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_woimg/vase/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <div class="assembly-mv assembly-na-cell"><span>N/A</span></div>
+            <model-viewer src="static/generation_woimg/vase/view_-1.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_woimg/vase/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
           </div>
-          <div class="column is-2-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fantastic/82.mp4" type="video/mp4">
-            </video>
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fantastic/88.mp4" type="video/mp4">
-            </video>
+
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_woimg/winebottle/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <div class="assembly-mv assembly-na-cell"><span>N/A</span></div>
+            <model-viewer src="static/generation_woimg/winebottle/view_-1.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_woimg/winebottle/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
           </div>
-          <div class="column is-2-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fantastic/31.mp4" type="video/mp4">
-            </video>
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fantastic/69.mp4" type="video/mp4">
-            </video>
+
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_woimg/1aa71039c31d41c5bddbe9bce0adef45/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <div class="assembly-mv assembly-na-cell"><span>N/A</span></div>
+            <model-viewer src="static/generation_woimg/1aa71039c31d41c5bddbe9bce0adef45/view_-1.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_woimg/1aa71039c31d41c5bddbe9bce0adef45/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
           </div>
-          <div class="column is-2-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fantastic/30.mp4" type="video/mp4">
-            </video>
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fantastic/29.mp4" type="video/mp4">
-            </video>
+
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_woimg/1b095ffc7c264993b9d7530a339cf6cf/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <div class="assembly-mv assembly-na-cell"><span>N/A</span></div>
+            <model-viewer src="static/generation_woimg/1b095ffc7c264993b9d7530a339cf6cf/view_-1.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_woimg/1b095ffc7c264993b9d7530a339cf6cf/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
           </div>
-          <div class="column is-2-desktop is-6-mobile">
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fantastic/7.mp4" type="video/mp4">
-            </video>
-            <video playsinline autoplay loop muted style="width: 100%; object-fit: cover; margin-bottom: 2px;">
-              <source src="static/videos/fantastic/13.mp4" type="video/mp4">
-            </video>
+
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_woimg/1b47d22b3bb44cfc9aef9ffedd93ffdd/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <div class="assembly-mv assembly-na-cell"><span>N/A</span></div>
+            <model-viewer src="static/generation_woimg/1b47d22b3bb44cfc9aef9ffedd93ffdd/view_-1.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_woimg/1b47d22b3bb44cfc9aef9ffedd93ffdd/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+          </div>
+
+          <div class="assembly-grid-row gen4-row">
+            <model-viewer src="static/generation_woimg/1e5cddb968df3efa94437adfc3930a08/view_input_colored.glb" loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <div class="assembly-mv assembly-na-cell"><span>N/A</span></div>
+            <model-viewer src="static/generation_woimg/1e5cddb968df3efa94437adfc3930a08/view_-1.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
+            <model-viewer src="static/generation_woimg/1e5cddb968df3efa94437adfc3930a08/view_gt.glb"            loading="lazy" camera-controls interaction-prompt="none" auto-rotate shadow-intensity="1" exposure="0.7" class="assembly-mv"></model-viewer>
           </div>
         </div>
 
