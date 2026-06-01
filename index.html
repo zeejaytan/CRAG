@@ -276,26 +276,26 @@
       <div class="columns is-multiline is-mobile has-text-centered teaser-viz-row">
         <div class="column is-one-quarter-tablet is-half-mobile">
           <model-viewer id="teaser-condition" class="teaser-mv"
-                        src="static/models/partnext/1/view_input_colored.glb"
+                        src="static/models/partnext/2/view_input_colored.glb"
                         camera-controls interaction-prompt="none" auto-rotate
                         shadow-intensity="1" exposure="0.7"></model-viewer>
         </div>
         <div class="column is-one-quarter-tablet is-half-mobile">
           <img id="teaser-image" class="teaser-img"
-               src="static/models/partnext/1/view_9.png" alt="Reference view">
+               src="static/models/partnext/2/view_9.png" alt="Reference view">
           <div id="teaser-image-na" class="teaser-img teaser-img-na" hidden>
             <span>N/A</span>
           </div>
         </div>
         <div class="column is-one-quarter-tablet is-half-mobile">
           <model-viewer id="teaser-generation" class="teaser-mv"
-                        src="static/models/partnext/1/view_9.glb"
+                        src="static/models/partnext/2/view_9.glb"
                         camera-controls interaction-prompt="none" auto-rotate
                         shadow-intensity="1" exposure="0.7"></model-viewer>
         </div>
         <div class="column is-one-quarter-tablet is-half-mobile">
           <model-viewer id="teaser-assembly" class="teaser-mv"
-                        src="static/models/partnext/1/view_assembly_9_colored.glb"
+                        src="static/models/partnext/2/view_assembly_9_colored.glb"
                         camera-controls interaction-prompt="none" auto-rotate
                         shadow-intensity="1" exposure="0.7"></model-viewer>
         </div>
@@ -328,9 +328,9 @@
 
       <div class="teaser-viz-buttons has-text-centered">
         <button type="button" class="teaser-btn is-active"
-                data-path="static/models/partnext/1/" data-suffix="9">Chair</button>
-        <button type="button" class="teaser-btn"
                 data-path="static/models/partnext/2/" data-suffix="9">Teapot</button>
+        <button type="button" class="teaser-btn"
+                data-path="static/models/partnext/1/" data-suffix="9">Chair</button>
         <button type="button" class="teaser-btn"
                 data-path="static/models/partnext/3/" data-suffix="9">Monitor</button>
         <button type="button" class="teaser-btn"
@@ -461,8 +461,8 @@
         <h2 class="title is-4">Qualitative Comparison</h2>
         <div class="content has-text-justified mb-4">
           <p>
-            Each row is the same shape reassembled by five methods. Corresponding parts share
-            the same color across the entire row, so part-level errors stand out at a glance.
+            Each row is the same shape reassembled by four methods. Corresponding parts share
+            the same color across the entire row.
             Models are loaded lazily as you scroll — orbit any viewer to inspect the assembly
             from a different angle.
           </p>
