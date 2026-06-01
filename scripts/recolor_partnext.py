@@ -18,9 +18,18 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import numpy as np
 import trimesh
 from trimesh.visual.material import PBRMaterial
 from trimesh.visual import TextureVisuals
+
+
+# Per-part outward displacement applied ONLY to condition (view_input) files,
+# so the "unposed parts" viewer doesn't pile everything at the origin. Each
+# part's vertices are translated by EXPLODE_FACTOR * (part_center - pivot),
+# where pivot is the mean of all part centers in that scene. 0.0 = no change,
+# 1.0 = double the original distance from the pivot.
+EXPLODE_FACTOR = 1.0
 
 
 # Pastel "macaron" palette as RGBA floats in [0, 1]. Kept in sync with the
@@ -88,7 +97,7 @@ def make_material(index: int, name_prefix: str) -> PBRMaterial:
     )
 
 
-def recolor_scene(src: Path, dst: Path) -> None:
+def recolor_scene(src: Path, dst: Path, explode: bool = False) -> None:
     scene = trimesh.load(src, force=None)
     if not isinstance(scene, trimesh.Scene):
         # Single-mesh GLBs (shouldn't happen for partnext, but be defensive).
@@ -109,9 +118,29 @@ def recolor_scene(src: Path, dst: Path) -> None:
     # browsers/loaders don't dedupe materials with identical names across files.
     name_prefix = f"{src.parent.parent.name}_{src.parent.name}"
 
+    # Pivot for the exploded view = mean of per-part vertex centers (each
+    # part weighted equally, regardless of vertex count). Computed once up
+    # front so every part shares the same reference point.
+    pivot = None
+    if explode and EXPLODE_FACTOR != 0.0:
+        centers = []
+        for key in ordered_keys:
+            verts = np.asarray(scene.geometry[key].vertices, dtype=np.float64)
+            if len(verts) > 0:
+                centers.append(verts.mean(axis=0))
+        if centers:
+            pivot = np.mean(np.stack(centers, axis=0), axis=0)
+
     for i, key in enumerate(ordered_keys):
         geom = scene.geometry[key]
         material = make_material(i, name_prefix)
+
+        if pivot is not None:
+            verts = np.asarray(geom.vertices, dtype=np.float64)
+            if len(verts) > 0:
+                center = verts.mean(axis=0)
+                displacement = EXPLODE_FACTOR * (center - pivot)
+                geom.vertices = verts + displacement
 
         # Drop any existing per-vertex / per-face color visuals so the material's
         # baseColorFactor isn't multiplied by stray vertex colors on export.
@@ -126,13 +155,16 @@ def recolor_scene(src: Path, dst: Path) -> None:
             geom.visual = TextureVisuals(material=material)
 
     scene.export(dst)
-    print(f"  wrote {dst.relative_to(REPO_ROOT)}  ({len(ordered_keys)} parts)")
+    explode_tag = "  [exploded]" if pivot is not None else ""
+    print(f"  wrote {dst.relative_to(REPO_ROOT)}  ({len(ordered_keys)} parts){explode_tag}")
 
 
-def targets_for(suffix: str) -> list[tuple[str, str]]:
+def targets_for(suffix: str) -> list[tuple[str, str, bool]]:
+    # (src_name, dst_name, explode) — only the condition view gets exploded;
+    # the assembly view must keep its predicted poses intact.
     return [
-        ("view_input.glb",                   "view_input_colored.glb"),
-        (f"view_assembly_{suffix}.glb",      f"view_assembly_{suffix}_colored.glb"),
+        ("view_input.glb",                   "view_input_colored.glb",                True),
+        (f"view_assembly_{suffix}.glb",      f"view_assembly_{suffix}_colored.glb",   False),
     ]
 
 
@@ -143,13 +175,13 @@ def main() -> None:
             print(f"skip (missing dir): {rel_path}")
             continue
         print(f"{rel_path}:")
-        for src_name, dst_name in targets_for(suffix):
+        for src_name, dst_name, explode in targets_for(suffix):
             src = example_dir / src_name
             if not src.exists():
                 print(f"  skip (missing): {src.relative_to(REPO_ROOT)}")
                 continue
             dst = example_dir / dst_name
-            recolor_scene(src, dst)
+            recolor_scene(src, dst, explode=explode)
 
 
 if __name__ == "__main__":
