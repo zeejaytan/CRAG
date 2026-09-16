@@ -29,9 +29,14 @@ echo "=== top-up: jaxtyping tyro pygltflib ==="
 echo "=== top-up: diso (no build isolation: torch+setuptools already in env) ==="
 "$UV" pip install --python "$PY" --no-build-isolation diso
 
-echo "=== upgrade pytorch3d -> CRAG-pinned 0.7.8 wheel ==="
-"$UV" pip install --python "$PY" --upgrade \
-  "https://github.com/MiroPsota/torch_packages_builder/releases/download/pytorch3d-0.7.8%2B5043d15/pytorch3d-0.7.8+5043d15pt2.8.0cu128-cp312-cp312-linux_x86_64.whl"
+echo "=== pytorch3d: sync GARF's working 0.7.7 build ==="
+# The CRAG-pinned 0.7.8 wheel needs glibc 2.35; Spartan GPU nodes have 2.34,
+# so it installs but cannot import. GARF's 0.7.7 was built on Spartan and
+# works, and CRAG only uses stable APIs (transforms, chamfer_distance).
+GARF_SP=/data/gpfs/projects/punim2657/GARF/.venv/lib/python3.12/site-packages
+CRAG_SP="$CRAG_ROOT/.venv/lib/python3.12/site-packages"
+rm -rf "$CRAG_SP/pytorch3d" "$CRAG_SP"/pytorch3d-*.dist-info "$CRAG_SP"/pytorch3d-*.egg-info
+cp -r "$GARF_SP/pytorch3d" "$GARF_SP/pytorch3d-0.7.7-py3.12.egg-info" "$CRAG_SP/"
 
 echo "=== import tests ==="
 "$PY" - <<'PY'
