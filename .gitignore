@@ -184,3 +184,25 @@ hpc_out/
 *.ply
 
 pretrained/
+
+# --- laptop <-> GitHub <-> Spartan workspace conventions ---
+# Laptop-side rsync landing zone (see scripts/remote/fetch_artifacts.sh)
+artifacts/
+
+# Machine-local HPC paths (see CLAUDE.local.md)
+CLAUDE.local.md
+
+# Heavy / HPC-only datasets and checkpoints (live on Spartan)
+data/
+checkpoints/
+*.hdf5
+*.h5
+*.ckpt
+wandb/
+*.out
+*.err
+
+# Agent / IDE / graph noise
+.claude/
+.cursor/
+graphify-out/
