@@ -23,8 +23,11 @@ module load GCC/13.3.0
 export CUDA_HOME="${CUDA_HOME:-$EBROOTCUDA}"
 export TORCH_CUDA_ARCH_LIST="8.0;8.6;8.9;9.0"
 
-echo "=== top-up: jaxtyping tyro pygltflib diso ==="
-"$UV" pip install --python "$PY" jaxtyping tyro pygltflib diso
+echo "=== top-up: jaxtyping tyro pygltflib ==="
+"$UV" pip install --python "$PY" jaxtyping tyro pygltflib
+
+echo "=== top-up: diso (no build isolation: torch+setuptools already in env) ==="
+"$UV" pip install --python "$PY" --no-build-isolation diso
 
 echo "=== upgrade pytorch3d -> CRAG-pinned 0.7.8 wheel ==="
 "$UV" pip install --python "$PY" --upgrade \
