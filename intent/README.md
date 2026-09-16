@@ -10,11 +10,11 @@ where TORA and GARF both fail on the Juglet.
 This folder is **state, not a log**. Edit a line when it turns out wrong; git holds the
 history. The runs themselves live in `docs/notes/` (created on first use).
 
-Prefix **`R`**, permanent. Numbers are never reused. **R2 is next.**
+Prefix **`CR`**, permanent. Numbers are never reused. **CR2 is next.**
 
 | # | Question | Status | Blocked by |
 |---|---|---|---|
-| [R1](R1-does-generation-help-the-juglet.md) | Does CRAG's generative shape prior help on the Juglet where pure assembly fails? | open — blocked on upstream checkpoint release | none |
+| [CR1](CR1-does-generation-help-the-juglet.md) | Does CRAG's generative shape prior help on the Juglet where pure assembly fails? | open — blocked on upstream checkpoint release | none |
 
 ## Related
 

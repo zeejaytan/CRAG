@@ -1,4 +1,4 @@
-# R1 — Does CRAG's generative shape prior help on the Juglet where pure assembly fails?
+# CR1 — Does CRAG's generative shape prior help on the Juglet where pure assembly fails?
 
 **Status:** open — blocked on upstream checkpoint/data release · **Blocked by:** none · **Effort:** ~days once a Stage 1 or Stage 2 checkpoint exists
 

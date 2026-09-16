@@ -61,7 +61,7 @@ parts an agent needs before it can act.
   `.scratch/<feature>/spec.md`, tickets one per file at
   `.scratch/<feature>/issues/<NN>-<slug>.md`, numbered from `01` in dependency order.
   Every ticket carries an **`Answers:`** line naming the question in `intent/` it exists
-  to settle -- `R1` for this project, `U6` for the workspace, or `none` for routine
+  to settle -- `CR1` for this project, `U6` for the workspace, or `none` for routine
   work. Conventions and the ticket template: `../docs/agents/issue-tracker.md`.
 - **Triage labels.** `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`,
   `wontfix`, recorded as a `Status:` line near the top of the ticket. Details:
@@ -73,7 +73,7 @@ parts an agent needs before it can act.
   (`part_acc`, chamfer distance, best-of-N) and outranks any local redefinition. ADRs go
   under `docs/adr/`. Details: `../docs/agents/domain.md`.
 - **Intent.** [`intent/`](intent/) holds what we are trying to establish and what would
-  settle it -- prefix **`R`**, permanent, numbers never reused. `/to-intent` opens a
+  settle it -- prefix **`CR`**, permanent, numbers never reused. `/to-intent` opens a
   question or writes a finished ticket's result back into one. Check the loop is wired
   with `python ../scripts/check_intent_links.py`.
 
