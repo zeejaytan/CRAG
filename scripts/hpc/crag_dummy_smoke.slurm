@@ -37,7 +37,10 @@ HYDRA_FULL_ERROR=1 python train.py \
     data.num_workers=4 \
     data.batch_size=8 \
     loggers=csv \
-    tags='["dummy_smoke"]'
+    tags='["dummy_smoke"]' \
+    '~callbacks.visualization_saving'
+    # ^ drop the viz callback: it needs real renderings/meshes per batch
+    # (raw_renderings, part meshes), which synthetic dummy batches lack.
 
 echo ""
 echo "=== SMOKE TEST COMPLETE ==="
