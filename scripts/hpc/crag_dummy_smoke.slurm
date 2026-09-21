@@ -17,6 +17,7 @@ source .venv/bin/activate
 
 export CUDA_HOME=/apps/easybuild-2022/easybuild/software/Core/CUDA/12.5.1
 export PATH=$CUDA_HOME/bin:$PATH
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
 echo "=== SMOKE TEST: CRAG Stage 1 under shared env (dummy data) ==="
 echo "Date: $(date)"
@@ -35,12 +36,19 @@ HYDRA_FULL_ERROR=1 python train.py \
     trainer.max_steps=150 \
     trainer.val_check_interval=50 \
     data.num_workers=4 \
-    data.batch_size=8 \
+    data.batch_size=2 \
+    data.num_points_per_object=2048 \
+    data.num_points_per_part=256 \
+    data.min_points_per_part=20 \
     loggers=csv \
     tags='["dummy_smoke"]' \
     '~callbacks.visualization_saving'
     # ^ drop the viz callback: it needs real renderings/meshes per batch
     # (raw_renderings, part meshes), which synthetic dummy batches lack.
+    # NOTE 2026-09-21: stg_1_partnext scales data to 20000 pts/object, which
+    # OOMs an 80 GB A100 at batch 8 (job 30822155: first step loss 1.29, then
+    # OOM in the VAE/norm forward). Dummy-scale overrides below prove the loop;
+    # full-scale memory sizing belongs to the real-data ticket, not this smoke.
 
 echo ""
 echo "=== SMOKE TEST COMPLETE ==="
