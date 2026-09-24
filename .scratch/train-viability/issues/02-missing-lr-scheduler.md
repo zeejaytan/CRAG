@@ -1,6 +1,12 @@
 # 02 — Restore missing `source/utils/lr_scheduler.py` (upstream gap)
 
-Status: ready-for-agent · Answers: none (routine unblock for the viability ladder)
+Status: done · Answers: none (routine unblock for the viability ladder)
+
+## Result (2026-09-21)
+
+Fix verified live: same dummy smoke `30872194` run — scheduler instantiated,
+training + validation ran to completion. (`garf_flow_matching` model remains
+ unrestored: orphan config, no experiment uses it — deliberately left alone.)
 
 ## Problem
 

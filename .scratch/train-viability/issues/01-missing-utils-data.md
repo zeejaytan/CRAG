@@ -1,6 +1,11 @@
 # 01 — Restore missing `source/utils/data.py` (upstream gap)
 
-Status: ready-for-agent · Answers: none (routine unblock for the viability ladder)
+Status: done · Answers: none (routine unblock for the viability ladder)
+
+## Result (2026-09-21)
+
+Fix verified live: dummy smoke `30872194` completed 150/150 steps
+(`SMOKE TEST COMPLETE`, loss 1.29 → 0.49, 2.5 GB `last.ckpt` saved).
 
 ## Problem
 

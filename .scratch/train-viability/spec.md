@@ -16,3 +16,15 @@ Ladder:
 
 Related: `intent/CR1-does-generation-help-the-juglet.md` (this ladder is the
 precondition, not the answer).
+
+## Result — harness complete (2026-09-21)
+
+Chain `30886021→22→23→24` (4 × ~4k-step segments, `afterok` cascade): all
+COMPLETED, ~65 min total. Resume worked 3/3 (Lightning picked up the global
+step each time; one benign warning about non-resumable dataloader mid-epoch).
+Final loss 0.0025 — the identity-pose dummy task memorized, exactly as
+predicted: this proves stability + resume + checkpointing
+(`output/harness/last.ckpt` 4.9 GB, plus `steps-step=010000.ckpt`), not
+learning. Throughput at dummy scale: ~4 steps/s single A100.
+Next gate (separate ticket): real CRAG-schema HDF5s or the upstream checkpoint
+release — that is what CR1 waits on.
