@@ -56,7 +56,9 @@ def convert_item(src_item: h5py.Group, dst_item: h5py.Group, png: bytes, n_views
 
     rend = dst_item.create_group("renderings")
     for i in range(n_views):
-        rend.create_dataset(f"view_{i:02d}.png", data=np.void(png))
+        rend.create_dataset(f"view_{i:02d}.png",
+                            data=np.frombuffer(png, dtype=np.uint8),
+                            compression="gzip", compression_opts=4)
     return len(names)
 
 
