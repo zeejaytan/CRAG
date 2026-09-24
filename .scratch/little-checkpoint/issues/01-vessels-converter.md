@@ -1,6 +1,14 @@
 # 01 — Convert TORA vessels (+ Juglet) to CRAG HDF5 schema
 
-Status: ready-for-agent · Answers: none (routine; serves CR1 without settling it)
+Status: done · Answers: none (routine; serves CR1 without settling it)
+
+## Result (2026-09-24)
+
+Converted `data/bbad_vessels_crag.hdf5` (410 train / 17 val, 229 MB) and read
+back through the true `CragDataset` path: batches collate (17–19 parts,
+12 views @224px). One converter bug caught by the verify step (scalar-void
+renderings unreadable → uint8 arrays). `up_axis: Z` assumed (BreakingBad
+convention); low stakes — `random_rotation` washes global orientation.
 
 ## Problem
 
