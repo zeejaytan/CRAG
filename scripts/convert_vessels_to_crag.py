@@ -83,6 +83,8 @@ def main() -> None:
                 if name not in src:
                     print(f"  skip (absent): {name}")
                     continue
+                if name in dst:
+                    del dst[name]  # same item under two splits: rewrite identically
                 try:
                     n_parts = convert_item(src[name], dst.create_group(name), png, args.views)
                 except Exception as e:  # noqa: BLE001 — log and continue; screening at read time
