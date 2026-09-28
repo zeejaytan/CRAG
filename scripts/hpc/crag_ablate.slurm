@@ -21,7 +21,7 @@ case "$PRESET" in
     EXTRA="data.num_points_per_object=20000 data.num_points_per_part=2048 data.min_points_per_part=512" ;;
   nocanon)
     EXP=abl_nocanon
-    EXTRA="data.num_points_per_object=2048 data.num_points_per_part=256 data.min_points_per_part=20 data.canonicalize=false" ;;
+    EXTRA="data.num_points_per_object=2048 data.num_points_per_part=256 data.min_points_per_part=20 +data.canonicalize=false" ;;" 
   *) echo "unknown preset: $PRESET" >&2; exit 2 ;;
 esac
 
