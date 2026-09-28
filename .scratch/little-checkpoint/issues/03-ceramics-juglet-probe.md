@@ -1,6 +1,22 @@
 # 03 — Probe: FRACTURA ceramics, then Juglet (zero-shot)
 
-Status: needs-info · Answers: none (routine; first CRAG ceramics number, not a CR1 verdict)
+Status: done · Answers: none (routine; first CRAG ceramics number, not a CR1 verdict)
+
+## Result (2026-09-28) — probes ran, outputs degenerate, no eye spent
+
+- Ceramics (little ckpt): part_acc 0.215, rmse_r 69°. Juglet (medium ckpt):
+  part_acc 0.111 (= 1/9), rmse_r 68°.
+- Render-before-reporting caught what the numbers hide: proposal meshes are
+  BIT-IDENTICAL to the stored arrangement (max abs diff 0.0, Juglet all three
+  scenes incl. input; ceramics narrow_bottle4 same). The model outputs
+  ~identity flow — nothing moves; the metric is reference-part credit only.
+  The "21%" is a measurement reading, not 21% seated.
+- A staged visual-qa pair of identical meshes was built then removed: a null
+  look must never reach the conservator. No `Needs-eye` spent; nothing to
+  witness until a checkpoint actually moves sherds.
+- Coherent with flat val (04): the setup never learned, so all probes show
+  the prior mean. Next: structural diagnosis per 04 (sampling density,
+  full-mesh bias), not more steps.
 
 Blocked by: 01, 02.
 
