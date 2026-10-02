@@ -14,6 +14,14 @@ flat at ~9% across six runs says it exploits nothing either.
 Verdict: mush. Stage-1 as released cannot learn thin shells here; further
 training spend needs VAE adaptation (Stage-2 surgery) or upstream release.
 
+## Follow-up (2026-10-02) — thick bone chunks: PARTLY SEES
+
+Same probe on `bone_crag.hdf5` (job 32091029): 82 parts, 0 dead channels,
+same-object AUC **0.627** (thin half 0.717, bulky 0.573 — inverted vs the
+paper's failure mode; small-n, don't over-read the split). Verdict:
+the encoder discriminates thick fractures moderately — the blindness is
+thin-shell-specific, not general. Reopens bone training as a working path.
+
 ## Why
 
 04 flat + 05 both spared: density and canonicalization change nothing, yet
