@@ -75,28 +75,31 @@ def main() -> None:
 
     png = placeholder_png(args.render_size)
     with h5py.File(args.source, "r") as src, h5py.File(args.output, "w") as dst:
+        collected: dict[str, list[str]] = {}
         for spec in args.splits:
             dst_split, src_path = spec.split(":", 1)
             names = [n.decode("utf-8") for n in src["data_split"][src_path][:]]
-            out_names = []
             for name in tqdm(names, desc=f"{args.category}/{dst_split}"):
                 if name not in src:
                     print(f"  skip (absent): {name}")
                     continue
                 if name in dst:
-                    del dst[name]  # same item under two splits: rewrite identically
-                try:
-                    n_parts = convert_item(src[name], dst.create_group(name), png, args.views)
-                except Exception as e:  # noqa: BLE001 — log and continue; screening at read time
-                    print(f"  skip (error): {name}: {type(e).__name__} {str(e)[:100]}")
-                    continue
-                if not 2 <= n_parts <= 20:
-                    del dst[name]
-                    continue
-                out_names.append(name)
+                    pass  # already converted under another split: reuse
+                else:
+                    try:
+                        n_parts = convert_item(src[name], dst.create_group(name), png, args.views)
+                    except Exception as e:  # noqa: BLE001 — log and continue; screening at read time
+                        print(f"  skip (error): {name}: {type(e).__name__} {str(e)[:100]}")
+                        continue
+                    if not 2 <= n_parts <= 20:
+                        del dst[name]
+                        continue
+                if name not in collected.setdefault(dst_split, []):
+                    collected[dst_split].append(name)
+        for dst_split, out_names in collected.items():
             dst.create_dataset(f"data_split/{args.category}/{dst_split}",
                                data=np.array(out_names, dtype="S"))
-            print(f"wrote {len(out_names)}/{len(names)} items -> data_split/{args.category}/{dst_split}")
+            print(f"wrote {len(out_names)} items -> data_split/{args.category}/{dst_split}")
 
 
 if __name__ == "__main__":

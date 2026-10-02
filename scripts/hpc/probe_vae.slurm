@@ -9,13 +9,16 @@
 #SBATCH --output=/data/gpfs/projects/punim2657/CRAG/probe_vae_%j.log
 set -euo pipefail
 
+HDF5="${1:-data/bbad_vessels_full_crag.hdf5}"
+CAT="${2:-bbad_vessels}"
+
 cd /data/gpfs/projects/punim2657/CRAG
 source .venv/bin/activate
 
 export CUDA_HOME=/apps/easybuild-2022/easybuild/software/Core/CUDA/12.5.1
 export PATH=$CUDA_HOME/bin:$PATH
 
-python scripts/probe_vae_features.py --hdf5 data/bbad_vessels_full_crag.hdf5 \
-    --category bbad_vessels --items 12 2>&1 | grep -vE "fallback|registered at|UserWarning|warnings.warn"
+python scripts/probe_vae_features.py --hdf5 "${HDF5}" \
+    --category "${CAT}" --items 12 2>&1 | grep -vE "fallback|registered at|UserWarning|warnings.warn"
 
 echo "=== PROBE VAE COMPLETE ==="
