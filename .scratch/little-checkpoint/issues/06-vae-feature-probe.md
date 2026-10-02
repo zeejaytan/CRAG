@@ -1,6 +1,18 @@
 # 06 — Probe VAE part-feature quality (no training)
 
-Status: ready-for-agent · Answers: none (routine; serves CR1 without settling it)
+Status: done · Answers: none (routine; serves CR1 without settling it)
+
+## Result (2026-10-02) — features carry no object identity
+
+198 vessel parts → 1024-dim frozen-VAE features (0 dead channels — alive,
+varying). Same-object retrieval AUC **0.512** (chance 0.5); thin half 0.528
+vs bulky half 0.531 — no difference. So not the paper's thin-specific
+failure mode: pooled features discriminate nothing at all.
+Caveat (held honestly): the probe mean-pools tokens; the assembly
+transformer attends over full token sequences, a richer signal — but val
+flat at ~9% across six runs says it exploits nothing either.
+Verdict: mush. Stage-1 as released cannot learn thin shells here; further
+training spend needs VAE adaptation (Stage-2 surgery) or upstream release.
 
 ## Why
 
