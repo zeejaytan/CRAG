@@ -80,9 +80,13 @@ def main() -> None:
                       overrides=["experiment=stg_1_partnext", "data=crag_dummy"])
     model = hydra.utils.instantiate(cfg.model)
     model.eval()
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    print("device:", device, flush=True)
+    model.to(device)
     print("model:", type(model).__name__, flush=True)
 
     batch, raws = load_batch(args.hdf5, args.category, args.items)
+    batch = {k: v.to(device) if torch.is_tensor(v) else v for k, v in batch.items()}
     out = model.encode_parts(
         coord=batch["pointclouds"], normal=batch["pointclouds_normals"],
         num_parts=batch["num_parts"], ref_part=batch["ref_part"],
@@ -102,7 +106,7 @@ def main() -> None:
         for _ in range(np_):
             k = int(toks[idx]) if idx < len(toks) else 0
             seg = feat[pos:pos + k]
-            vecs.append(seg.mean(dim=0) if len(seg) else torch.zeros(feat.shape[-1]))
+            vecs.append(seg.mean(dim=0) if len(seg) else torch.zeros(feat.shape[-1], device=feat.device))
             obj_ids.append(oi)
             pos += k
             idx += 1
@@ -111,7 +115,7 @@ def main() -> None:
     # only up to permutation, fine for a median split)
     thick = all_thick[:len(vecs)]
 
-    V = torch.stack(vecs).numpy()
+    V = torch.stack(vecs).detach().cpu().numpy()
     print(f"parts: {len(V)}, dim: {V.shape[1]}", flush=True)
 
     var = V.var(axis=0)
