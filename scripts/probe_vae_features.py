@@ -87,11 +87,12 @@ def main() -> None:
 
     batch, raws = load_batch(args.hdf5, args.category, args.items)
     batch = {k: v.to(device) if torch.is_tensor(v) else v for k, v in batch.items()}
-    out = model.encode_parts(
-        coord=batch["pointclouds"], normal=batch["pointclouds_normals"],
-        num_parts=batch["num_parts"], ref_part=batch["ref_part"],
-        points_per_part=batch["points_per_part"], scales=batch["scales"],
-    )
+    with torch.autocast("cuda", dtype=torch.float16):  # mirror training (16-mixed); flash_attn needs fp16/bf16
+        out = model.encode_parts(
+            coord=batch["pointclouds"], normal=batch["pointclouds_normals"],
+            num_parts=batch["num_parts"], ref_part=batch["ref_part"],
+            points_per_part=batch["points_per_part"], scales=batch["scales"],
+        )
     feat, spp = out["feat"], out["points_per_part"]
     print("feat:", tuple(feat.shape), "sampled_per_part:", spp.tolist()[:8], flush=True)
 
