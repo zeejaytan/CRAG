@@ -23,3 +23,11 @@ coarse poses on thick fractures and stalls; scheduler-resume checked
 (LambdaLR state restores last_epoch, per-segment max_decay extends the
 cosine continuously — no freeze artifact). Bone ckpt now probing ceramics
 + Juglet (jobs 32112553/54).
+
+## Probes (2026-10-03) — no transfer
+
+Ceramics part_acc 0.2146 (bit-identical to the little-ckpt run — same
+identity proposals, anchor credit only), Juglet 1/9. The coarse bone
+prior does not move real sherds. Ladder conclusion: the stack learns
+coarse bone poses and stalls; nothing learned leaves the bone domain.
+Training spend ends here pending VAE adaptation or upstream release.
