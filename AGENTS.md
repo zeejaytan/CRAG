@@ -33,6 +33,8 @@ git push origin HEAD
 ./scripts/remote/fetch_artifacts.sh logs/<experiment> ./artifacts/
 ```
 
+Workbench layout, and the harvest-then-delete procedure that goes with it: `C:\PR\docs\agents\workspace-hygiene.md`. Deletion follows `C:\PR\AGENTS.md` rule 13. Canonical checkout `/data/gpfs/projects/punim2657/CRAG`; its `runs/` + `attic/` are not yet set up.
+
 ## Domain / debugging
 
 CRAG is a 3D assembly + 3D generation method built on GARF plus a TripoSG shape
